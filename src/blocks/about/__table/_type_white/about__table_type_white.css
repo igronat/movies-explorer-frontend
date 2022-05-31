@@ -1,0 +1,15 @@
+.about__table_type_white {
+    color: white;
+    width: 228px;
+}
+@media screen and (max-width: 1023px) {
+    .about__table_type_white {
+        width: 140px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .about__table_type_white {
+        width: 100px;
+    }
+}

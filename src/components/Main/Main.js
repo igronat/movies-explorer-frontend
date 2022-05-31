@@ -1,12 +1,12 @@
 import React from "react";
 import Header from "../Header";
 import Promo from "./Promo";
+import AboutProject from "./AboutProject"
 
 function Main() {
   
     return (
         <>
-       
         <Header 
         tema="header header__main"
         link="/signup"
@@ -15,9 +15,8 @@ function Main() {
         link2="/signin"
         name2="button"
         />
-
        <Promo />
-
+       <AboutProject />
        
 
         </>
