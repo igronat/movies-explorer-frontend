@@ -1,0 +1,17 @@
+.navigation__link_type_button {
+    background-color: #3456F3;
+    color: white;
+    min-width: 76px;
+    min-height: 22px;
+    border-radius: 3px;
+    padding: 12px 0 0 0 ;
+    
+}
+
+@media screen and (max-width: 676px) {
+    .navigation__link_type_button {
+        min-width: 54px;
+        min-height: 22px;  
+        padding: 4px 0 0 0 ; ; 
+    }
+}

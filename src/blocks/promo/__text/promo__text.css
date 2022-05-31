@@ -1,0 +1,17 @@
+.promo__text {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 16px;
+  mix-blend-mode: normal;
+  opacity: 0.5;
+  margin: 0;
+  max-width: 310px;
+}
+
+@media screen and (max-width: 1023px) {
+    .promo__text {
+        max-width: 260px;
+    }
+}

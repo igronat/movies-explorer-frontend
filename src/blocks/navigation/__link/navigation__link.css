@@ -1,0 +1,24 @@
+.navigation__link {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 16px;
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+    margin-right: 30px;
+    text-align: center;
+
+}
+
+@media screen and (max-width: 1023px) {
+    .navigation__link {
+        font-size: 10px;
+        margin-right: 14px;
+    }
+}
+
+.navigation__link:hover {
+    opacity: 0.6;
+}

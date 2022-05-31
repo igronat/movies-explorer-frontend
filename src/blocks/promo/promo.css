@@ -1,0 +1,21 @@
+.promo {
+  background-color: rgba(221, 222, 227, 1);
+  padding: 75px 70px 50px 70px;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+@media screen and (max-width: 1023px) {
+  .promo {
+    padding: 140px 0px 66px 0px;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .promo {
+    padding: 70px 0px 30px 0px;
+  }
+}

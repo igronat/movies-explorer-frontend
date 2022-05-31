@@ -1,0 +1,15 @@
+.navigation {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-right: 40px;
+    
+}
+
+@media screen and (max-width: 1023px) {
+    .navigation {
+        margin-right: 0
+           
+    }
+}
