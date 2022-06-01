@@ -1,7 +1,8 @@
 import React from "react";
 import Header from "../Header";
 import Promo from "./Promo";
-import AboutProject from "./AboutProject"
+import AboutProject from "./AboutProject";
+import Techs from "./Techs";
 
 function Main() {
   
@@ -17,7 +18,7 @@ function Main() {
         />
        <Promo />
        <AboutProject />
-       
+       <Techs />
 
         </>
     )

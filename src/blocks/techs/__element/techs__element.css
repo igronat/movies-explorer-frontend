@@ -1,0 +1,21 @@
+.techs__element {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  letter-spacing: -0.04em;
+  background-color: #e8e8e8;
+  border-radius: 10px;
+  padding-top: 21.5px;
+  margin-right: 10px;
+}
+
+
+@media screen and (max-width: 1023px) {
+  .techs__element {
+    font-size: 12px;
+    line-height: 15px;
+    padding-top: 21.5px;
+  }
+}

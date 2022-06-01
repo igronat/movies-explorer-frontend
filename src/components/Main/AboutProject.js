@@ -3,7 +3,7 @@ import React from "react";
 function AboutProject() {
   return (
     <>
-      <section className="about">
+      <section className="about" id="about">
         <h2 className="title">О проекте</h2>
         <div className="about__description">
           <div className="about__paragraph">
@@ -24,15 +24,21 @@ function AboutProject() {
           </div>
         </div>
 
-        <table className="about__table" >
-          <tr height="36">
-            <td bgcolor="#3456F3" className="about__table_type_white">1 неделя</td>
-            <td bgcolor="#F2F2F2">4 недели</td>
-          </tr>
-          <tr height="36" className="about__table_type_grey">
-            <td>Back-end</td>
-            <td>Front-end</td>
-          </tr>
+        <table className="about__table">
+          <thead>
+            <tr height="36">
+              <td bgcolor="#3456F3" className="about__table_type_white">
+                1 неделя
+              </td>
+              <td bgcolor="#F2F2F2">4 недели</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr height="36" className="about__table_type_grey">
+              <td>Back-end</td>
+              <td>Front-end</td>
+            </tr>
+          </tbody>
         </table>
       </section>
     </>

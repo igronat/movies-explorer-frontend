@@ -6,7 +6,7 @@ function NavTab() {
     return (
 
             <button className="navTab">
-                <Link className="navTab__link">Узнать больше</Link>
+                <a href="#about" className="navTab__link">Узнать больше</a>
             </button>
     
     )
