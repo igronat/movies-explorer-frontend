@@ -1,0 +1,12 @@
+.aboutMe__link {
+    padding: 0;
+    margin-right: 20px;
+    text-decoration: none;
+    color: #000000;
+}
+
+@media screen and (max-width: 767px) {
+    .aboutMe__link {
+        margin-right: 26px;
+    }
+  }

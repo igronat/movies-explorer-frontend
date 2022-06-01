@@ -1,0 +1,27 @@
+.aboutMe__name {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 50px;
+  line-height: 58px;
+  letter-spacing: -0.04em;
+  padding: 0;
+  margin-bottom: 18px;
+  margin-top: 0;
+}
+
+@media screen and (max-width: 1023px) {
+    .aboutMe__name {
+        font-size: 40px;
+        line-height: 40px;
+        margin-bottom: 16px;
+    }
+  }
+  
+  @media screen and (max-width: 767px) {
+    .aboutMe__name {
+        font-size: 30px;
+        line-height: 36px;
+        margin-bottom: 20px;
+    }
+  }
