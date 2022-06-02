@@ -5,6 +5,11 @@
     color: #000000;
 }
 
+.aboutMe__link:hover {
+    opacity: 0.5;
+    transition: opacity 1s ease;
+}
+
 @media screen and (max-width: 767px) {
     .aboutMe__link {
         margin-right: 26px;

@@ -4,6 +4,7 @@ import Promo from "./Promo";
 import AboutProject from "./AboutProject";
 import Techs from "./Techs";
 import AboutMe from "./AboutMe"
+import Footer from "../Footer"
 
 function Main() {
   
@@ -21,6 +22,7 @@ function Main() {
        <AboutProject />
        <Techs />
        <AboutMe />
+       <Footer />
 
         </>
     )
