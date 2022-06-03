@@ -9,15 +9,18 @@
     cursor: pointer;
     margin-right: 30px;
     text-align: center;
+    position: relative;
 
 }
 
-@media screen and (max-width: 1023px) {
-    .navigation__link {
-        font-size: 10px;
-        margin-right: 14px;
-    }
+.navigation__link:last-child {
+   
+    margin-right: 0px;
+   
+
 }
+
+
 
 .navigation__link:hover {
     opacity: 0.6;

@@ -4,8 +4,10 @@
 @import url(./blocks/header/header.css);
 @import url(./blocks/logo/logo.css);
 @import url(./blocks/header/__main/header__main);
+@import url(./blocks/header/__nav/header__nav.css);
 @import url(./blocks/navigation/navigation.css);
 @import url(./blocks/navigation/__link/navigation__link.css);
+@import url(./blocks/navigation/__link/_active/navigation__link_active.css);
 @import url(./blocks/navigation/__link/_type_button/navigation__link_type_button.css);
 @import url(./blocks/promo/promo.css);
 @import url(./blocks/promo/__logo/promo__logo.css);
@@ -76,3 +78,9 @@
 @import url(./blocks/moviesCardList/moviesCardList.css);
 @import url(./blocks/more/more.css);
 @import url(./blocks/more/__button/more__button.css);
+@import url(./blocks/hamburger/hamburger.css);
+@import url(./blocks/hamburger/__btn/hamburgerMenu__btn.css);
+@import url(./blocks/hamburger/__input/hamburgerMenu__input.css);
+@import url(./blocks/navigation/__link/_type_hamburger/navigation__link_type_hamburger.css);
+@import url(./blocks/navigation/__link/_type_hidden/navigation__link_type_hidden.css);
+@import url(./blocks/navigation/__link/_type_hidden/navigation__link_type_noHidden.css);

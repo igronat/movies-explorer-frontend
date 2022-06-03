@@ -1,6 +1,12 @@
 .header__menu {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    
+  display: flex;
+  
+}
+
+.header__nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
 }

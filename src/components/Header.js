@@ -1,37 +1,31 @@
-import React from 'react';
-import logo from '../images/logo.svg';
-import Navigation from './Navigation';
-import Account from "./Account"
+import React from "react";
+import logo from "../images/logo.svg";
+import Navigation from "./Navigation";
 
-function Header({
- tema,
- link,
-    link2,
-    menu,
-    menu2,
-    name,
-    name2,
-    ability
-}) {
 
+function HeaderMain({
+    ability,
+  }) {
     return (
-        <header className={tema}>
-            <img className="logo" alt="логотип" src={logo}/>
-            <div className="header__nav">
-                <Navigation
-                link={link}
-                menu={menu}
-                menu2={menu2}
-                link2={link2}
-                name={name}
-                name2={name2}
-                />
-            </div>
-            <Account 
-            ability={ability}
+      <header className="header header__main">
+        <img className="logo" alt="логотип" src={logo} />
+        
+        <div className="header__menu">
+          <div className="header__nav">
+            <Navigation
+            hidden="hidden"
+               link="/signup"
+               menu="Регистрация"
+               menu2="Войти"
+               link2="/signin"
+               name2="button"
             />
-        </header>
-    );
-};
+  
+            
+          </div>
+        </div>
+      </header>
+    )
+  }
 
-export default Header;
+  export default HeaderMain
