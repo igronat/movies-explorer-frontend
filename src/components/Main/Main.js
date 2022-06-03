@@ -17,13 +17,13 @@ function Main() {
         menu2="Войти"
         link2="/signin"
         name2="button"
+        ability="disability"
         />
        <Promo />
        <AboutProject />
        <Techs />
        <AboutMe />
        <Footer />
-
         </>
     )
   }

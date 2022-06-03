@@ -1,6 +1,7 @@
 import React from 'react';
 import logo from '../images/logo.svg';
 import Navigation from './Navigation';
+import Account from "./Account"
 
 function Header({
  tema,
@@ -9,7 +10,8 @@ function Header({
     menu,
     menu2,
     name,
-    name2
+    name2,
+    ability
 }) {
 
     return (
@@ -25,6 +27,9 @@ function Header({
                 name2={name2}
                 />
             </div>
+            <Account 
+            ability={ability}
+            />
         </header>
     );
 };

@@ -13,11 +13,9 @@ function Navigation({
     return (
     
         <nav className="navigation">
-        <NavLink to={link} className={`navigation__link navigation__link_type_${name}`}>{menu}</NavLink>
-        <NavLink to={link2} className={`navigation__link navigation__link_type_${name2}`}>{menu2}</NavLink>
+        <NavLink to={link} className={`navigation__link navigation__link_type_${name}`} activeClassName="navigation__link_active">{menu}</NavLink>
+        <NavLink to={link2} className={`navigation__link navigation__link_type_${name2}`} activeClassName="navigation__link_active">{menu2}</NavLink>
         </nav>
-         
-         
 
     );
 };

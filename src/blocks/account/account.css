@@ -1,0 +1,15 @@
+.account {
+    margin-right: 70px;
+}
+
+@media screen and (max-width: 1023px) {
+    .account {
+        margin-right: 30px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .account {
+        margin-right: 14px;
+    }
+}
