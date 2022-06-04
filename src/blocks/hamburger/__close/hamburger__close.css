@@ -1,0 +1,15 @@
+@media screen and (max-width: 1023px) {
+  .hamburger__close {
+    background-image: url(../../../images/cover.svg);
+    width: 22px;
+    height: 22px;
+    cursor: pointer;
+    position: fixed;
+    display: block;
+    right: 0;
+    background-size: cover;
+    position: fixed;
+    z-index: 5;
+    margin-right: 30px;
+  }
+}

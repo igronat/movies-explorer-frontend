@@ -4,8 +4,10 @@
 
 @media screen and (max-width: 1023px) {
   .hamburger {
-    position: relative;
+    cursor: pointer;
+    position: fixed;
     display: block;
+    right: 0;
     width: 30px;
     height: 20px;
     z-index: 5;
@@ -33,7 +35,6 @@
     position: absolute;
     width: 100%;
     height: 2px;
-
     height: 2px;
     left: 0;
     top: 9px;
@@ -43,26 +44,38 @@
 @media screen and (max-width: 1023px) {
   .hamburger__menu {
     position: fixed;
-
     justify-content: center;
     width: 520px;
-    height: 1024px;
+    height: 100%;
     top: 0;
     right: 0;
     background-color: white;
+    transform: translateY(-100%);
+    transition: all 1s;
     z-index: 4;
+    
   }
-  .hamburger__nav {
-    display: block;
-    height: 100%;
-    text-align: center;
-    margin-top: 159px;
-  }
+
 }
 
-@media screen and (max-width: 676px) {
-  .hamburger__menu {
-    width: 100%;
-    height: 100%;
-  }
+
+/* .overlay {
+    
+   
+    
+    
 }
+.overlay_type_active {
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    opacity: 0.3;
+    position: relative;
+    z-index: 3;
+    box-shadow: 4px;
+    transition: all 1s;
+  } */
+
+

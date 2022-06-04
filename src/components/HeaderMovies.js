@@ -3,14 +3,16 @@ import logo from "../images/logo.svg";
 import Navigation from "./Navigation";
 import Account from "./Account";
 
-export function HeaderMovies() {
+export function HeaderMovies({ active, setActive }) {
+    
   return (
     <header className="header header__movies">
       <img className="logo" alt="логотип" src={logo} />
-      <div className="hamburger">
+      <div className={active ? `hamburger__close` : `hamburger`} onClick={setActive}>
         <span></span>
-      </div>
-      <div className="header__menu hamburger__menu">
+      </div >
+      
+      <div className={active ? `header__menu hamburger__menu hamburger__menu_type_active` : `header__menu hamburger__menu`}>
         <div className="header__nav hamburger__nav">
           <Navigation
           hidden="noHidden"
@@ -26,6 +28,7 @@ export function HeaderMovies() {
           <Account />
         </div>
       </div>
+      
     </header>
   )
 }

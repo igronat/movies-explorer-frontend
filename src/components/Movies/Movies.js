@@ -5,17 +5,23 @@ import MoviesCardList from "./MoviesCardList";
 import More from "./More";
 import Footer from "../Footer"
 
-function Movies() {
+function Movies({ active, setActive }) {
 
     return (
     <>
     <div className="movies">
-      <HeaderMovies/>
+    
+      <HeaderMovies
+      setActive={setActive}
+      active={active}
+      />
+     
       <SearchForm />
      <MoviesCardList />
      <More />
      <Footer />
       
+     
       </div>
     </>
     )

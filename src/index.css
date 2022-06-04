@@ -5,6 +5,7 @@
 @import url(./blocks/logo/logo.css);
 @import url(./blocks/header/__main/header__main);
 @import url(./blocks/header/__nav/header__nav.css);
+@import url(./blocks/header/__menu/header__menu.css);
 @import url(./blocks/navigation/navigation.css);
 @import url(./blocks/navigation/__link/navigation__link.css);
 @import url(./blocks/navigation/__link/_active/navigation__link_active.css);
@@ -53,7 +54,6 @@
 @import url(./blocks/footer/__list/footer__list.css);
 @import url(./blocks/footer/__paragraph/footer__paragraph.css);
 @import url(./blocks/footer/__title/footer__title.css);
-@import url(./blocks/header/__movies/header__movies.css);
 @import url(./blocks/account/account.css);
 @import url(./blocks/account/__disability/account__disability.css);
 @import url(./blocks/account/__link/account__link.css);
@@ -66,7 +66,6 @@
 @import url(./blocks/filterCheckbox/__input/filterCheckbox__input.css);
 @import url(./blocks/filterCheckbox/__label/filterCheckbox__label.css);
 @import url(./blocks/filterCheckbox/__name/filterCheckbox__name.css);
-@import url(./blocks/header/__movies/header__movies.css);
 @import url(./blocks/moviesCard/moviesCard.css);
 @import url(./blocks/moviesCard/__button/moviesCard__button.css);
 @import url(./blocks/moviesCard/__description/moviesCard__description.css);
@@ -79,8 +78,12 @@
 @import url(./blocks/more/more.css);
 @import url(./blocks/more/__button/more__button.css);
 @import url(./blocks/hamburger/hamburger.css);
-@import url(./blocks/hamburger/__btn/hamburgerMenu__btn.css);
-@import url(./blocks/hamburger/__input/hamburgerMenu__input.css);
+@import url(./blocks/hamburger/__menu/_type_active/hamburger__menu_type_active.css);
+@import url(./blocks/hamburger/__close/hamburger__close.css);
+@import url(./blocks/hamburger/__menu/hamburger__menu.css);
+@import url(./blocks/hamburger/__nav/hamburger__nav.css);
 @import url(./blocks/navigation/__link/_type_hamburger/navigation__link_type_hamburger.css);
 @import url(./blocks/navigation/__link/_type_hidden/navigation__link_type_hidden.css);
 @import url(./blocks/navigation/__link/_type_hidden/navigation__link_type_noHidden.css);
+@import url(./blocks/navigation/__hamburger/navigation__hamburger.css);
+

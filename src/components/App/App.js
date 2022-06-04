@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Route, Switch} from "react-router-dom";
 import Main from "../Main/Main";
 import Movies from "../Movies/Movies";
@@ -22,6 +22,14 @@ import Login from "../Login";
 // import bad from "../images/bad.jpg";
 
 function App() {
+  const [menuActive, setMenuActive] = useState(false);
+
+
+  const handleBurgerClick = () => {
+    setMenuActive(!menuActive)
+  }
+
+
 
  return (
     
@@ -31,7 +39,10 @@ function App() {
         </Route>
 
         <Route exact path="/movies">
-          <Movies />
+          <Movies 
+          active={menuActive}
+          setActive={handleBurgerClick}
+          />
         </Route>
 
         <Route exact path="/saved-movies">
