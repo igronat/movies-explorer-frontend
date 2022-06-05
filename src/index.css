@@ -60,7 +60,7 @@
 @import url(./blocks/searchForm/searchForm.css);
 @import url(./blocks/searchForm/__button/searchForm__button.css);
 @import url(./blocks/searchForm/__input/searchForm__input.css);
-@import url(./blocks/movies/movies.css);
+@import url(./blocks/background-color/background-color_grey.css);
 @import url(./blocks/filterCheckbox/filterCheckbox.css);
 @import url(./blocks/filterCheckbox/__slider/filterCheckbox__slider.css);
 @import url(./blocks/filterCheckbox/__input/filterCheckbox__input.css);
@@ -86,4 +86,18 @@
 @import url(./blocks/navigation/__link/_type_hidden/navigation__link_type_hidden.css);
 @import url(./blocks/navigation/__link/_type_hidden/navigation__link_type_noHidden.css);
 @import url(./blocks/navigation/__hamburger/navigation__hamburger.css);
+@import url(./blocks/margin-bottom/margin-bottom.css);
+@import url(./blocks/profile/profile.css);
+@import url(./blocks/profile/__edit/profile__edit.css);
+@import url(./blocks/profile/__exit/profile__exit.css);
+@import url(./blocks/profile/__form/profile__form.css);
+@import url(./blocks/profile/__header/profile__header.css);
+@import url(./blocks/profile/__menu/profile__menu.css);
+@import url(./blocks/profile/__name/profile__name.css);
+@import url(./blocks/profile/__nameRow/profile__nameRow.css);
+@import url(./blocks/profile/__row/profile__row.css);
+@import url(./blocks/profile/__rows/profile__rows.css);
+@import url(./blocks/size/size.css);
+
+
 

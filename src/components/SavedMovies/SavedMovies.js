@@ -1,10 +1,31 @@
 import React from "react";
+import HeaderMovies from "../HeaderMovies";
+import SearchForm from "../Movies/SearchForm";
+import MoviesCardList from "../Movies/MoviesCardList";
 
-function SavedMovies() {
-  
+import Footer from "../Footer"
+
+function SavedMovies({ active, setActive }) {
+
     return (
-        <div>Это SavedMovies</div>
+    <>
+    <div className="backgroundColor_grey">
+    
+      <HeaderMovies
+      setActive={setActive}
+      active={active}
+      />
+     
+      <SearchForm />
+     <MoviesCardList />
+    <div className="margin-bottom"></div>
+     <Footer />
+      
+     
+      </div>
+    </>
     )
-  }
-  
-  export default SavedMovies;
+
+}
+
+export default SavedMovies;

@@ -9,7 +9,7 @@ function Movies({ active, setActive }) {
 
     return (
     <>
-    <div className="movies">
+    <div className="backgroundColor_grey">
     
       <HeaderMovies
       setActive={setActive}

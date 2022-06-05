@@ -46,11 +46,17 @@ function App() {
         </Route>
 
         <Route exact path="/saved-movies">
-          <SavedMovies />
+          <SavedMovies 
+          active={menuActive}
+          setActive={handleBurgerClick}
+          />
         </Route>
 
         <Route exact path="/profile">
-          <Profile />
+          <Profile 
+          active={menuActive}
+          setActive={handleBurgerClick}
+          />
         </Route>
 
         <Route exact path="/signin">

@@ -1,0 +1,11 @@
+.profile__row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-bottom: solid 1px #E8E8E8;
+}
+
+.profile__row:last-child {
+ 
+    border-bottom: none;
+}
