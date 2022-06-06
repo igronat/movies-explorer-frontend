@@ -1,15 +1,14 @@
 .navTab__link {
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 500;
-    font-size: 12px;
-    line-height: 16px;
-    text-decoration: none;
-    color: black;
-    margin: 0 auto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  text-decoration: none;
+  color: black;
+  margin: 0 auto;
 }
 
 .navTab__link:hover {
-    opacity: 0.5;
-    transition: opacity 1s ease;
+  opacity: 0.5;
+  transition: opacity 1s ease;
 }

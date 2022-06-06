@@ -53,11 +53,8 @@
     transform: translateY(-100%);
     transition: all 1s;
     z-index: 4;
-    
   }
-
 }
-
 
 /* .overlay {
     
@@ -77,5 +74,3 @@
     box-shadow: 4px;
     transition: all 1s;
   } */
-
-

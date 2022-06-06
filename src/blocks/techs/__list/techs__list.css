@@ -1,25 +1,24 @@
 .techs__list {
-    display: grid;
-    grid-template-rows: 60px;
-    grid-template-columns: repeat(7,90px);
-    justify-content: center;
-    text-align: center;
-    list-style: none;
-    gap: 10px;
-    margin: 0;
-    
+  display: grid;
+  grid-template-rows: 60px;
+  grid-template-columns: repeat(7, 90px);
+  justify-content: center;
+  text-align: center;
+  list-style: none;
+  gap: 10px;
+  margin: 0;
 }
 
 @media screen and (max-width: 1023) {
-    .techs__list {
-        grid-template-rows: 57px;
-    grid-template-columns: repeat(7,84px);
-    }
+  .techs__list {
+    grid-template-rows: 57px;
+    grid-template-columns: repeat(7, 84px);
   }
+}
 
 @media screen and (max-width: 767px) {
-    .techs__list {
-    grid-template-columns: repeat(2,84px);
-    grid-template-rows: repeat(5,57px);
-    }
+  .techs__list {
+    grid-template-columns: repeat(2, 84px);
+    grid-template-rows: repeat(5, 57px);
   }
+}

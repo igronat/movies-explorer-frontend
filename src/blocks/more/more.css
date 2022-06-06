@@ -1,17 +1,15 @@
 .more {
-    padding: 50px 70px 80px 70px;
+  padding: 50px 70px 80px 70px;
 }
 
 @media screen and (max-width: 1023px) {
-    .more {
-        padding: 50px 30px 80px 30px;
-    }
+  .more {
+    padding: 50px 30px 80px 30px;
+  }
 }
 
 @media screen and (max-width: 676px) {
-    .more {
-        
-        padding: 50px 10px 80px 10px;
-    
-    }
+  .more {
+    padding: 50px 10px 80px 10px;
+  }
 }

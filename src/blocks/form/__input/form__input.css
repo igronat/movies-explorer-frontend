@@ -1,11 +1,10 @@
 .form__input {
-    font-family: 'Inter';
-font-style: normal;
-font-weight: 400;
-font-size: 14px;
-line-height: 17px;
-border: none;
-border-bottom: solid 1px #E8E8E8;
-width: 100%;
-padding-bottom: 10px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  border: none;
+  border-bottom: solid 1px #e8e8e8;
+  width: 100%;
+  padding-bottom: 10px;
 }

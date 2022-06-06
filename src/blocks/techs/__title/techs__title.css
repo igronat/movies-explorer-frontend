@@ -1,5 +1,4 @@
 .techs__title {
-  font-family: "Inter";
   font-style: normal;
   font-weight: 400;
   font-size: 50px;
@@ -11,15 +10,15 @@
 }
 
 @media screen and (max-width: 1023px) {
-    .techs__title {
-        margin-bottom: 22px;
-    }
+  .techs__title {
+    margin-bottom: 22px;
   }
+}
 
 @media screen and (max-width: 767px) {
-    .techs__title {
-        margin-bottom: 24px;
-        font-size: 30px;
-        line-height: 36px;
-    }
+  .techs__title {
+    margin-bottom: 24px;
+    font-size: 30px;
+    line-height: 36px;
   }
+}

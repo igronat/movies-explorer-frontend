@@ -1,5 +1,4 @@
 .footer__link {
-  font-family: "Inter";
   font-style: normal;
   font-weight: 400;
   font-size: 13px;
@@ -15,8 +14,8 @@
 }
 
 .footer__link:hover {
-    opacity: 0.5;
-    transition: opacity 1s ease;
+  opacity: 0.5;
+  transition: opacity 1s ease;
 }
 
 @media screen and (max-width: 767px) {

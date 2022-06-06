@@ -1,21 +1,19 @@
 .register {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding-top: 70px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 70px;
 }
 
 @media screen and (max-width: 1023px) {
-    .register {
-        padding-top: 232px;
-    }
+  .register {
+    padding-top: 232px;
   }
+}
 
-  @media screen and (max-width: 767px) {
-    .register {
-        padding-top: 56px;
-    }
+@media screen and (max-width: 767px) {
+  .register {
+    padding-top: 56px;
   }
-
- 
+}

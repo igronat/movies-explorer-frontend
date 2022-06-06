@@ -1,6 +1,6 @@
 import React from "react";
 import Portfolio from "./Portfolio";
-import MyFoto from "../../images/myfoto.jpg"
+import MyFoto from "../../images/myfoto.jpg";
 
 function AboutMe() {
   return (
@@ -22,23 +22,23 @@ function AboutMe() {
               свои знания на практике.
             </p>
             <div className="aboutMe__links">
-            <a
-              className="aboutMe__link"
-              href="https://vk.com/nata.radina"
-              target="blank"
-            >
-              ВКонтакте
-            </a>
-            <a
-              className="aboutMe__link"
-              href="https://github.com/igronat"
-              target="blank"
-            >
-              Github
-            </a>
+              <a
+                className="aboutMe__link"
+                href="https://vk.com/nata.radina"
+                target="blank"
+              >
+                ВКонтакте
+              </a>
+              <a
+                className="aboutMe__link"
+                href="https://github.com/igronat"
+                target="blank"
+              >
+                Github
+              </a>
+            </div>
           </div>
-          </div>
-          
+
           <img className="aboutMe__img" alt="мое фото" src={MyFoto}></img>
         </div>
 

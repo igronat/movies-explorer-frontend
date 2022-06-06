@@ -1,16 +1,15 @@
 .searchForm__input {
-    background-color: #F4F4F4;
-    border: none;
-    border-radius: 4px;
-    height: 48px;
-    margin-right: 10px;
-    width: 100%;
-    padding-left: 22px;
+  background-color: #f4f4f4;
+  border: none;
+  border-radius: 4px;
+  height: 48px;
+  margin-right: 10px;
+  width: 100%;
+  padding-left: 22px;
 }
 
 @media screen and (max-width: 767px) {
-    .searchForm__input {
-        height: 44px;
-      
-    }
+  .searchForm__input {
+    height: 44px;
   }
+}

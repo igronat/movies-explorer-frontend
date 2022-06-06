@@ -1,5 +1,4 @@
 .techs__text {
-  font-family: "Inter";
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
@@ -8,12 +7,11 @@
   padding: 0;
   max-width: 460px;
   margin: 0;
-  
 }
 
 @media screen and (max-width: 767px) {
-    .techs__text {
-        font-size: 11px;
-        line-height: 16px;
-    }
+  .techs__text {
+    font-size: 11px;
+    line-height: 16px;
   }
+}

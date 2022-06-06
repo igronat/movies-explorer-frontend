@@ -1,19 +1,19 @@
 .not-found {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-top: 246px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 246px;
 }
 
 @media screen and (max-width: 1023px) {
-    .not-found {
-        margin-top: 350px;
-    }
+  .not-found {
+    margin-top: 350px;
   }
+}
 
-  @media screen and (max-width: 767px) {
-    .not-found {
-        margin-top: 300px;
-    }
+@media screen and (max-width: 767px) {
+  .not-found {
+    margin-top: 300px;
   }
+}

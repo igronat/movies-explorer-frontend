@@ -5,20 +5,28 @@ import Account from "./Account";
 import { Link } from "react-router-dom";
 
 export function HeaderMovies({ active, setActive }) {
-    
   return (
     <header className="header header__movies">
-       <Link to="/">
+      <Link to="/">
         <img className="logo logo__margin" alt="логотип" src={logo} />
-        </Link>
-      <div className={active ? `hamburger__close` : `hamburger`} onClick={setActive}>
+      </Link>
+      <div
+        className={active ? `hamburger__close` : `hamburger`}
+        onClick={setActive}
+      >
         <span></span>
-      </div >
-      
-      <div className={active ? `header__menu hamburger__menu hamburger__menu_type_active` : `header__menu hamburger__menu`}>
+      </div>
+
+      <div
+        className={
+          active
+            ? `header__menu hamburger__menu hamburger__menu_type_active`
+            : `header__menu hamburger__menu`
+        }
+      >
         <div className="header__nav hamburger__nav">
           <Navigation
-          hidden="noHidden"
+            hidden="noHidden"
             link="/movies"
             menu="Фильмы"
             menu2="Сохраненные фильмы"
@@ -31,10 +39,8 @@ export function HeaderMovies({ active, setActive }) {
           <Account />
         </div>
       </div>
-      
     </header>
-  )
+  );
 }
 
-
-  export default HeaderMovies
+export default HeaderMovies;

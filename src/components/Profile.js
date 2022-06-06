@@ -13,11 +13,15 @@ function Profile({ active, setActive }) {
             <div className="profile__rows">
               <div className="profile__row">
                 <p className="profile__nameRow">Имя</p>
-                <input className="profile__name " placeholder="Имя"/>
+                <input className="profile__name " placeholder="Имя" />
               </div>
               <div className="profile__row">
                 <p className="profile__nameRow">E-mail</p>
-                <input className="profile__name " type="email" placeholder="E-mail"/>
+                <input
+                  className="profile__name "
+                  type="email"
+                  placeholder="E-mail"
+                />
               </div>
             </div>
           </form>

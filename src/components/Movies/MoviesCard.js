@@ -4,119 +4,117 @@ import Film from "../../images/film.jpg";
 function MoviesCard() {
   return (
     <>
-    <article className="moviesCard">
-          <img alt="Фото фильма" className="moviesCard__image" src={Film} />
+      <article className="moviesCard">
+        <img alt="Фото фильма" className="moviesCard__image" src={Film} />
 
-          <div className="moviesCard__description">
-              <div>
-                  <h2 className="moviesCard__title">Властелин колец</h2>
-                  <p className="moviesCard__time">200 min</p>
-              </div>
-
-              <label className="moviesCard__likes">
-                  <input type="checkbox" className="moviesCard__input"></input>
-                  <span className="moviesCard__button"></span>
-              </label>
+        <div className="moviesCard__description">
+          <div>
+            <h2 className="moviesCard__title">Властелин колец</h2>
+            <p className="moviesCard__time">200 min</p>
           </div>
-      </article><article className="moviesCard">
-              <img alt="Фото фильма" className="moviesCard__image" src={Film} />
 
-              <div className="moviesCard__description">
-                  <div>
-                      <h2 className="moviesCard__title">Властелин колец</h2>
-                      <p className="moviesCard__time">200 min</p>
-                  </div>
-
-                  <label className="moviesCard__likes">
-                      <input type="checkbox" className="moviesCard__input"></input>
-                      <span className="moviesCard__button"></span>
-                  </label>
-              </div>
-          </article>
-
-          <article className="moviesCard">
-      <img alt="Фото фильма" className="moviesCard__image" src={Film} />
-
-      <div className="moviesCard__description">
-        <div>
-          <h2 className="moviesCard__title">Властелин колец</h2>
-          <p className="moviesCard__time">200 min</p>
+          <label className="moviesCard__likes">
+            <input type="checkbox" className="moviesCard__input"></input>
+            <span className="moviesCard__button"></span>
+          </label>
         </div>
+      </article>
+      <article className="moviesCard">
+        <img alt="Фото фильма" className="moviesCard__image" src={Film} />
 
-        <label className="moviesCard__likes">
-          <input type="checkbox" className="moviesCard__input"></input>
-          <span className="moviesCard__button"></span>
-        </label>
-      </div>
-    </article>
+        <div className="moviesCard__description">
+          <div>
+            <h2 className="moviesCard__title">Властелин колец</h2>
+            <p className="moviesCard__time">200 min</p>
+          </div>
 
-    <article className="moviesCard">
-      <img alt="Фото фильма" className="moviesCard__image" src={Film} />
-
-      <div className="moviesCard__description">
-        <div>
-          <h2 className="moviesCard__title">Властелин колец</h2>
-          <p className="moviesCard__time">200 min</p>
+          <label className="moviesCard__likes">
+            <input type="checkbox" className="moviesCard__input"></input>
+            <span className="moviesCard__button"></span>
+          </label>
         </div>
+      </article>
 
-        <label className="moviesCard__likes">
-          <input type="checkbox" className="moviesCard__input"></input>
-          <span className="moviesCard__button"></span>
-        </label>
-      </div>
-    </article>
+      <article className="moviesCard">
+        <img alt="Фото фильма" className="moviesCard__image" src={Film} />
 
-    <article className="moviesCard">
-      <img alt="Фото фильма" className="moviesCard__image" src={Film} />
+        <div className="moviesCard__description">
+          <div>
+            <h2 className="moviesCard__title">Властелин колец</h2>
+            <p className="moviesCard__time">200 min</p>
+          </div>
 
-      <div className="moviesCard__description">
-        <div>
-          <h2 className="moviesCard__title">Властелин колец</h2>
-          <p className="moviesCard__time">200 min</p>
+          <label className="moviesCard__likes">
+            <input type="checkbox" className="moviesCard__input"></input>
+            <span className="moviesCard__button"></span>
+          </label>
         </div>
+      </article>
 
-        <label className="moviesCard__likes">
-          <input type="checkbox" className="moviesCard__input"></input>
-          <span className="moviesCard__button"></span>
-        </label>
-      </div>
-    </article>
+      <article className="moviesCard">
+        <img alt="Фото фильма" className="moviesCard__image" src={Film} />
 
-    <article className="moviesCard">
-      <img alt="Фото фильма" className="moviesCard__image" src={Film} />
+        <div className="moviesCard__description">
+          <div>
+            <h2 className="moviesCard__title">Властелин колец</h2>
+            <p className="moviesCard__time">200 min</p>
+          </div>
 
-      <div className="moviesCard__description">
-        <div>
-          <h2 className="moviesCard__title">Властелин колец</h2>
-          <p className="moviesCard__time">200 min</p>
+          <label className="moviesCard__likes">
+            <input type="checkbox" className="moviesCard__input"></input>
+            <span className="moviesCard__button"></span>
+          </label>
         </div>
+      </article>
 
-        <label className="moviesCard__likes">
-          <input type="checkbox" className="moviesCard__input"></input>
-          <span className="moviesCard__button"></span>
-        </label>
-      </div>
-    </article>
+      <article className="moviesCard">
+        <img alt="Фото фильма" className="moviesCard__image" src={Film} />
 
-    <article className="moviesCard">
-      <img alt="Фото фильма" className="moviesCard__image" src={Film} />
+        <div className="moviesCard__description">
+          <div>
+            <h2 className="moviesCard__title">Властелин колец</h2>
+            <p className="moviesCard__time">200 min</p>
+          </div>
 
-      <div className="moviesCard__description">
-        <div>
-          <h2 className="moviesCard__title">Властелин колец</h2>
-          <p className="moviesCard__time">200 min</p>
+          <label className="moviesCard__likes">
+            <input type="checkbox" className="moviesCard__input"></input>
+            <span className="moviesCard__button"></span>
+          </label>
         </div>
+      </article>
 
-        <label className="moviesCard__likes">
-          <input type="checkbox" className="moviesCard__input"></input>
-          <span className="moviesCard__button"></span>
-        </label>
-      </div>
-    </article>
+      <article className="moviesCard">
+        <img alt="Фото фильма" className="moviesCard__image" src={Film} />
 
-    
-          </>
-    
+        <div className="moviesCard__description">
+          <div>
+            <h2 className="moviesCard__title">Властелин колец</h2>
+            <p className="moviesCard__time">200 min</p>
+          </div>
+
+          <label className="moviesCard__likes">
+            <input type="checkbox" className="moviesCard__input"></input>
+            <span className="moviesCard__button"></span>
+          </label>
+        </div>
+      </article>
+
+      <article className="moviesCard">
+        <img alt="Фото фильма" className="moviesCard__image" src={Film} />
+
+        <div className="moviesCard__description">
+          <div>
+            <h2 className="moviesCard__title">Властелин колец</h2>
+            <p className="moviesCard__time">200 min</p>
+          </div>
+
+          <label className="moviesCard__likes">
+            <input type="checkbox" className="moviesCard__input"></input>
+            <span className="moviesCard__button"></span>
+          </label>
+        </div>
+      </article>
+    </>
   );
 }
 

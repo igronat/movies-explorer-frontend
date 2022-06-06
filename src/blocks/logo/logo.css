@@ -15,10 +15,10 @@
 }
 
 .logo {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .logo:hover {
-    opacity: 0.5;
-    transition: opacity 1s ease;
+  opacity: 0.5;
+  transition: opacity 1s ease;
 }

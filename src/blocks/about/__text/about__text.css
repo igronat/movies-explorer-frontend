@@ -1,25 +1,21 @@
 .about__text {
-  font-family: "Inter";
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
-  
 }
 
 @media screen and (max-width: 1023px) {
-    .about__text {
-        font-size: 12px;
-        line-height: 18px;
-    
-    }
+  .about__text {
+    font-size: 12px;
+    line-height: 18px;
+  }
 }
 
 @media screen and (max-width: 767px) {
-    .about__text {
-        font-size: 11px;
-        line-height: 16px;
-        margin-bottom: 56px;
-    
-    }
+  .about__text {
+    font-size: 11px;
+    line-height: 16px;
+    margin-bottom: 56px;
+  }
 }

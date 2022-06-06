@@ -1,11 +1,9 @@
 .moviesCard {
-    display: flex;
-    flex-direction: column;
-    background: #FFFFFF;
-    border-radius: 10px;
-   
-    position: relative;
-    padding: 0;
-    margin: 0;
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+  border-radius: 10px;
+  position: relative;
+  padding: 0;
+  margin: 0;
 }
-

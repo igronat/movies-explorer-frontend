@@ -30,7 +30,8 @@ function Portfolio() {
             target="blanc"
             className="portfolio__link"
           >
-            Одностраничное приложение<img src={Arrow} className="portfolio__arrow"></img>
+            Одностраничное приложение
+            <img src={Arrow} className="portfolio__arrow"></img>
           </a>
         </li>
       </ul>

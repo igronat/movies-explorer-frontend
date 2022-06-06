@@ -1,5 +1,4 @@
 .aboutMe__description {
-  font-family: "Inter";
   font-style: normal;
   font-weight: 500;
   font-size: 18px;
@@ -10,16 +9,16 @@
 }
 
 @media screen and (max-width: 1023px) {
-    .aboutMe__description {
-        font-size: 12px;
-        line-height: 18px;
-        margin-bottom: 20px;
-    }
+  .aboutMe__description {
+    font-size: 12px;
+    line-height: 18px;
+    margin-bottom: 20px;
   }
-  
-  @media screen and (max-width: 767px) {
-    .aboutMe__description {
-        font-size: 11px;
-        line-height: 16px;
-    }
+}
+
+@media screen and (max-width: 767px) {
+  .aboutMe__description {
+    font-size: 11px;
+    line-height: 16px;
   }
+}

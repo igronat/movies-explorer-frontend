@@ -1,9 +1,9 @@
 .navigation__link_type_noHidden {
-display: none;
+  display: none;
 }
 
 @media screen and (max-width: 1023px) {
-    .navigation__link_type_noHidden {
-        display: block;
-    }
+  .navigation__link_type_noHidden {
+    display: block;
+  }
 }

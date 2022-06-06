@@ -1,15 +1,12 @@
 .navigation__link_active {
-    font-size: 13px;
-line-height: 18px;
-
+  font-size: 13px;
+  line-height: 18px;
 }
 
 @media screen and (max-width: 1023px) {
-    .navigation__link_active {
-        font-size: 18px;
-        line-height: 22px;
-        border-bottom: solid 1px;
-        
-        
-    }
+  .navigation__link_active {
+    font-size: 18px;
+    line-height: 22px;
+    border-bottom: solid 1px;
+  }
 }

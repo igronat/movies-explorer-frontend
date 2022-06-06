@@ -7,20 +7,16 @@ import AboutMe from "./AboutMe";
 import Footer from "../Footer";
 
 function Main() {
-  
-    return (
-        <>
-        <HeaderMain 
-       
-        ability="disability"
-        />
-       <Promo />
-       <AboutProject />
-       <Techs />
-       <AboutMe />
-       <Footer />
-        </>
-    )
-  }
-  
-  export default Main;
+  return (
+    <>
+      <HeaderMain ability="disability" />
+      <Promo />
+      <AboutProject />
+      <Techs />
+      <AboutMe />
+      <Footer />
+    </>
+  );
+}
+
+export default Main;

@@ -1,11 +1,9 @@
 .profile__name {
-    font-family: 'Inter';
-font-style: normal;
-font-weight: 400;
-font-size: 11px;
-line-height: 13px;
-border: none;
-text-align: right;
-background-color: #FAFAFA;
-
+  font-style: normal;
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 13px;
+  border: none;
+  text-align: right;
+  background-color: #fafafa;
 }

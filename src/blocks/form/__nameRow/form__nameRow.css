@@ -1,9 +1,7 @@
 .form__nameRow {
-    ont-family: 'Inter';
-font-style: normal;
-font-weight: 400;
-font-size: 10px;
-line-height: 12px;
-
-color: #A0A0A0;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 12px;
+  color: #a0a0a0;
 }
