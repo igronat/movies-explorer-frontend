@@ -17,7 +17,7 @@ function Profile({ active, setActive }) {
               </div>
               <div className="profile__row">
                 <p className="profile__nameRow">E-mail</p>
-                <input className="profile__name " placeholder="E-mail"/>
+                <input className="profile__name " type="email" placeholder="E-mail"/>
               </div>
             </div>
           </form>

@@ -2,12 +2,15 @@ import React from "react";
 import logo from "../images/logo.svg";
 import Navigation from "./Navigation";
 import Account from "./Account";
+import { Link } from "react-router-dom";
 
 export function HeaderMovies({ active, setActive }) {
     
   return (
     <header className="header header__movies">
-      <img className="logo" alt="логотип" src={logo} />
+       <Link to="/">
+        <img className="logo logo__margin" alt="логотип" src={logo} />
+        </Link>
       <div className={active ? `hamburger__close` : `hamburger`} onClick={setActive}>
         <span></span>
       </div >
