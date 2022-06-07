@@ -1,0 +1,14 @@
+.moviesCard__delete {
+  background-image: url(../../../images/cover.svg);
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  display: block;
+  right: 0;
+  background-size: cover;
+}
+
+.moviesCard__input_type_delete {
+  display: none;
+}
+

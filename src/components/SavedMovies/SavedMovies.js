@@ -5,14 +5,17 @@ import MoviesCardList from "../Movies/MoviesCardList";
 
 import Footer from "../Footer";
 
-function SavedMovies({ active, setActive }) {
+function SavedMovies({ active, setActive}) {
   return (
     <>
       <div className="backgroundColor_grey">
-        <HeaderMovies setActive={setActive} active={active} />
+        <HeaderMovies setActive={setActive} active={active}/>
 
         <SearchForm />
-        <MoviesCardList />
+        <MoviesCardList 
+        isButton="delete"
+        inputButton="input_type_delete"
+        spanButton="button_type_delete"/>
         <div className="margin-bottom"></div>
         <Footer />
       </div>

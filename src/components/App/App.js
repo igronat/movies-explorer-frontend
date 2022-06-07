@@ -26,6 +26,7 @@ function App() {
 
   const handleBurgerClick = () => {
     setMenuActive(!menuActive);
+    
   };
 
   const handleSuccess = () => {
@@ -38,6 +39,7 @@ function App() {
   const closeAllPopups = () => {
     setSuccess(false);
     setFailure(false);
+    
   };
 
   return (
@@ -52,7 +54,7 @@ function App() {
         </Route>
 
         <Route exact path="/saved-movies">
-          <SavedMovies active={menuActive} setActive={handleBurgerClick} />
+          <SavedMovies active={menuActive} setActive={handleBurgerClick}/>
         </Route>
 
         <Route exact path="/profile">
