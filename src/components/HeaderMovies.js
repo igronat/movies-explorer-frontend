@@ -34,6 +34,7 @@ export function HeaderMovies({ active, setActive }) {
             name="hamburger"
             name2="hamburger"
             burger="hamburger"
+            setActive={setActive}
           />
 
           <Account />
