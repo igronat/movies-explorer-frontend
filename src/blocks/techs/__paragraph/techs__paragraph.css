@@ -1,0 +1,24 @@
+.techs__paragraph {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  margin-top: 90px;
+  margin-bottom: 100px;
+  padding: 0;
+  justify-content: center;
+  align-items: center;
+}
+
+@media screen and (max-width: 1023px) {
+  .techs__paragraph {
+    margin-top: 80px;
+    margin-bottom: 78px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .techs__paragraph {
+    margin-top: 60px;
+    margin-bottom: 50px;
+  }
+}

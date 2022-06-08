@@ -1,0 +1,35 @@
+.moviesCard__button {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: white;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+  border-radius: 50%;
+  border: none;
+  box-shadow: 0 0 10px 3px #d7d7d7;
+}
+
+.moviesCard__button:before {
+  position: absolute;
+  content: "";
+  height: 12px;
+  width: 12px;
+  left: 2px;
+  bottom: 2px;
+  background-color: #f4f4f4;
+  border-radius: 50%;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.moviesCard__input:checked + .moviesCard__button:before {
+  background-color: #2be080;
+}
+
+.moviesCard__button:before {
+  border-radius: 50%;
+}

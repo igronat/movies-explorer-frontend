@@ -1,0 +1,14 @@
+.about__paragraph {
+  max-width: 550px;
+  margin-right: 40px;
+}
+
+.about__paragraph:last-child {
+  margin-right: 0px;
+}
+
+@media screen and (max-width: 1023px) {
+  .about__paragraph {
+    margin-right: 30px;
+  }
+}

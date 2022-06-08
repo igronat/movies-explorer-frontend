@@ -1,0 +1,15 @@
+.about__table {
+  width: 100%;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+}
+
+@media screen and (max-width: 767px) {
+  .about__table {
+    font-size: 11px;
+    line-height: 13px;
+  }
+}

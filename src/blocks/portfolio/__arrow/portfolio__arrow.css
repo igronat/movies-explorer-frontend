@@ -1,0 +1,16 @@
+.portfolio__arrow {
+  float: right;
+  width: 29px;
+}
+
+@media screen and (max-width: 1023px) {
+  .portfolio__arrow {
+    width: 27px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .portfolio__arrow {
+    width: 18px;
+  }
+}

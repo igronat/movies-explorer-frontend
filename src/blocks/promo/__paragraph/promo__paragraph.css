@@ -1,0 +1,20 @@
+.promo__paragraph {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+@media screen and (max-width: 1023px) {
+  .promo__paragraph {
+    margin-top: 48px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .promo__paragraph {
+    margin-top: 44px;
+  }
+}
