@@ -1,33 +1,33 @@
-export const BASE_URL = "http://localhost:3000";
+export const BASE_URL = "http://igronat.back.nomoreparties.sbs";
 
 const checkResponse = (response) => {
-  try {
-    if (response.status === 201) {
-      return response.json();
+    try {
+      if (response.status === 201) {
+        return response.json();
+      }
+      if (response.status === 200) {
+        return response.json();
+      }
+    } catch (e) {
+      return e;
     }
-    if (response.status === 200) {
-      return response.json();
-    }
-  } catch (e) {
-    return e;
-  }
-};
-
-export const register = (email, password) => {
-  return fetch(`${BASE_URL}/signup`, {
-    method: "POST",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ email, password }),
-  })
-    .then(checkResponse)
-    .then((res) => {
-      return res;
+  };
+  
+  export const register = (name, email, password) => {
+    return fetch(`${BASE_URL}/signup`, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ name, email, password }),
     })
-    .catch((err) => console.log(err));
-};
+      .then(checkResponse)
+      .then((res) => {
+        return res;
+      })
+      .catch((err) => console.log(err));
+  };
 
 export const authorize = (email, password) => {
   return fetch(`${BASE_URL}/signin`, {

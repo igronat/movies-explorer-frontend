@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Route, Switch } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Route, Switch, useHistory } from "react-router-dom";
 import Main from "../Main/Main";
 import Movies from "../Movies/Movies";
 import SavedMovies from "../SavedMovies/SavedMovies";
@@ -10,6 +10,9 @@ import PageNotFound from "../PageNotFound";
 import InfoTooltip from "../InfoTooltip";
 // import api from "../../utils/Api";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext.js";
+import * as mainApi from "../../utils/MainApi";
+import moviesApi from "../../utils/MoviesApi";
+import ProtectedRoute from "../ProtectedRoute";
 
 import ok from "../../images/ok.jpg";
 import bad from "../../images/bad.jpg";
@@ -23,10 +26,106 @@ function App() {
   });
   const [isSuccess, setSuccess] = useState(false);
   const [isFailure, setFailure] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [userData, setUserData] = useState({});
+  const history = useHistory();
+
+  const token = localStorage.getItem("jwt");
+
+  useEffect(() => {
+    tokenCheck();
+  }, []);
+
+  useEffect(() => {
+    if (loggedIn) {
+      mainApi
+        .getContent(token)
+        .then((user) => {
+          setCurrentUser(user);
+        })
+        .catch((err) => console.log(`Ошибка профиля: ${err}`));
+
+       
+    }
+  }, [loggedIn]);
+
+  const handleRegister = (name, email, password) => {
+    return mainApi
+      .register(name, email, password)
+      .then((res) => {
+        if (res) {
+          setLoggedIn({
+            loggedIn: true,
+          });
+          handleSuccess();
+          history.push("/movies");
+        } else {
+          handleFailure();
+        }
+      })
+      .catch((err) => {
+        console.log(`Ошибка регистрации пользователя: ${err}`);
+      });
+  };
+
+  const handleLogin = (email, password) => {
+    return mainApi
+      .authorize(email, password)
+      .then((res) => {
+          if (res) {
+          setLoggedIn({
+            loggedIn: true,
+          });
+          handleSuccess();
+          history.push("/movies");
+        } else {
+          handleFailure();
+        }
+        
+      })
+      .catch((err) => {
+        handleFailure();
+        console.log(`Ошибка авторизации пользователя: ${err}`);
+      });
+  };
+
+  // const handleProfile = (email, name) => {
+  //   return mainApi
+  //     .getContent(token)
+  //     .then((res) => {
+  //       const userData = { email, name };
+  //       setUserData(userData);
+  //     })
+
+  //     .catch((err) => {
+  //       handleFailure();
+  //       console.log(`Ошибка авторизации пользователя: ${err}`);
+  //     });
+  // };
+
+  function tokenCheck() {
+    if (localStorage.getItem("token")) {
+      let token = localStorage.getItem("token");
+      mainApi.getContent(token).then(({ data }) => {
+        if (data) {
+          let userData = {
+            email: data.email,
+            id: data._id,
+          };
+          setUserData(userData);
+          setLoggedIn({
+            loggedIn: true,
+          });
+          history.push("/");
+        }
+      });
+    }
+  }
+
+  
 
   const handleBurgerClick = () => {
     setMenuActive(!menuActive);
-    
   };
 
   const handleSuccess = () => {
@@ -39,8 +138,31 @@ function App() {
   const closeAllPopups = () => {
     setSuccess(false);
     setFailure(false);
-    
   };
+
+  function componentMovies() {
+    return (
+      <>
+        <Movies active={menuActive} setActive={handleBurgerClick} />
+      </>
+    );
+  }
+
+  function componentSavedMovies() {
+    return (
+      <>
+        <SavedMovies active={menuActive} setActive={handleBurgerClick} />
+      </>
+    );
+  }
+
+  function componentProfile() {
+    return (
+      <>
+        <Profile active={menuActive} setActive={handleBurgerClick} userData={currentUser}/>
+      </>
+    );
+  }
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -49,46 +171,55 @@ function App() {
           <Main />
         </Route>
 
-        <Route exact path="/movies">
-          <Movies active={menuActive} setActive={handleBurgerClick} />
-        </Route>
+        <ProtectedRoute
+          exact
+          path="/movies"
+          component={componentMovies}
+          loggedIn={loggedIn}
+        />
 
-        <Route exact path="/saved-movies">
-          <SavedMovies active={menuActive} setActive={handleBurgerClick}/>
-        </Route>
+        <ProtectedRoute
+          exact
+          path="/saved-movies"
+          component={componentSavedMovies}
+          loggedIn={loggedIn}
+        />
 
-        <Route exact path="/profile">
-          <Profile active={menuActive} setActive={handleBurgerClick} />
-        </Route>
+        <ProtectedRoute
+          exact
+          path="/profile"
+          component={componentProfile}
+          loggedIn={loggedIn}
+        />
 
         <Route exact path="/signin">
-          <Login />
+          <Login handleLogin={handleLogin} />
         </Route>
 
         <Route exact path="/signup">
-          <Register />
+          <Register handleRegister={handleRegister} />
         </Route>
 
         <Route path="*">
           <PageNotFound />
         </Route>
       </Switch>
-      {/* 
-<InfoTooltip
-name="ok"
-img={ok}
-title="Вы успешно зарегистрировались"
-isOpen={isSuccess}
-onClose={closeAllPopups}
-/>
 
-<InfoTooltip
-name="bad"
-img={bad}
-title="Что-то пошло не так! Попробуйте еще раз."
-isOpen={isFailure}
-onClose={closeAllPopups}
-/> */}
+      <InfoTooltip
+        name="ok"
+        img={ok}
+        title="Добро пожаловать!"
+        isOpen={isSuccess}
+        onClose={closeAllPopups}
+      />
+
+      <InfoTooltip
+        name="bad"
+        img={bad}
+        title="Что-то пошло не так! Попробуйте еще раз."
+        isOpen={isFailure}
+        onClose={closeAllPopups}
+      />
     </CurrentUserContext.Provider>
   );
 }
