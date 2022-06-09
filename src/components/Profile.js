@@ -3,7 +3,7 @@ import HeaderMovies from "./HeaderMovies";
 import { Link } from "react-router-dom";
 import {CurrentUserContext} from "../contexts/CurrentUserContext";
 
-function Profile({ active, setActive, handleProfile, userData }) {
+function Profile({ active, setActive, handleProfile, userData, signOut }) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const currentUser = useContext(CurrentUserContext);
@@ -80,7 +80,7 @@ function Profile({ active, setActive, handleProfile, userData }) {
             <Link to="/profile" className="profile__edit">
               Редактировать
             </Link>
-            <Link to="/" className="profile__exit">
+            <Link onClick={signOut} to="/" className="profile__exit">
               Выйти из аккаунта
             </Link>
           </div>

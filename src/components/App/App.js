@@ -26,6 +26,7 @@ function App() {
   });
   const [isSuccess, setSuccess] = useState(false);
   const [isFailure, setFailure] = useState(false);
+  const [isError, setError] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
   const [userData, setUserData] = useState({});
   const history = useHistory();
@@ -79,7 +80,7 @@ function App() {
           handleSuccess();
           history.push("/movies");
         } else {
-          handleFailure();
+          handleError();
         }
         
       })
@@ -122,7 +123,10 @@ function App() {
     }
   }
 
-  
+  const signOut = () => {
+    localStorage.removeItem("token");
+    history.push("/");
+  };
 
   const handleBurgerClick = () => {
     setMenuActive(!menuActive);
@@ -135,9 +139,14 @@ function App() {
     setFailure(true);
   };
 
+  const handleError = () => {
+    setError(true);
+  };
+
   const closeAllPopups = () => {
     setSuccess(false);
     setFailure(false);
+    setError(false)
   };
 
   function componentMovies() {
@@ -159,7 +168,7 @@ function App() {
   function componentProfile() {
     return (
       <>
-        <Profile active={menuActive} setActive={handleBurgerClick} userData={currentUser}/>
+        <Profile active={menuActive} setActive={handleBurgerClick} userData={currentUser} signOut={signOut}/>
       </>
     );
   }
@@ -218,6 +227,14 @@ function App() {
         img={bad}
         title="Что-то пошло не так! Попробуйте еще раз."
         isOpen={isFailure}
+        onClose={closeAllPopups}
+      />
+
+<InfoTooltip
+        name="error"
+        img={bad}
+        title="Почта и/или пароль неверные"
+        isOpen={isError}
         onClose={closeAllPopups}
       />
     </CurrentUserContext.Provider>
