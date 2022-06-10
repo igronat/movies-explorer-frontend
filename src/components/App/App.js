@@ -22,7 +22,6 @@ function App() {
   const [currentUser, setCurrentUser] = useState({
     name: "",
     email: "",
-    password: "",
   });
   const [isSuccess, setSuccess] = useState(false);
   const [isFailure, setFailure] = useState(false);
@@ -123,6 +122,15 @@ function App() {
     }
   }
 
+  const handleUpdateUser = (user) => {
+    mainApi
+      .editProfile(user, token)
+      .then((res) => {
+        setCurrentUser(res);
+      })
+      .catch((err) => console.log(`Ошибка обновления профиля: ${err}`));
+  };
+
   const signOut = () => {
     localStorage.removeItem("token");
     history.push("/");
@@ -168,7 +176,7 @@ function App() {
   function componentProfile() {
     return (
       <>
-        <Profile active={menuActive} setActive={handleBurgerClick} userData={currentUser} signOut={signOut}/>
+        <Profile active={menuActive} setActive={handleBurgerClick} userData={currentUser} signOut={signOut} onUpdateUser={handleUpdateUser}/>
       </>
     );
   }

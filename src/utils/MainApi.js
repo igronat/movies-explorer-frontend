@@ -60,3 +60,18 @@ export const getContent = (token) => {
     .then((res) => res.json())
     .then((data) => data);
 };
+
+export const editProfile = (data, token) => {
+    return fetch(`${BASE_URL}/users/me`, {
+      method: "PATCH",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: data.name,
+        email: data.email,
+      }),
+    }).then(checkResponse);
+    
+  }
