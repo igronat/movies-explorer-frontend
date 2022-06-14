@@ -19,8 +19,7 @@ function Profile({ active, setActive, userData, signOut, onUpdateUser }) {
       setEmail(currentUser.email);
     }
   }, [currentUser]);
-  console.log(currentUser.name !== name);
-  //console.log(currentUser.email === email)
+ 
   useEffect(() => {
     if (nameError || emailError) {
       setformValid(false);

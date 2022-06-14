@@ -6,7 +6,7 @@ import More from "./More";
 import Footer from "../Footer";
 
 
-function Movies({ active, setActive }) {
+function Movies({ active, setActive, movies,  }) {
 
 
   return (
@@ -14,8 +14,13 @@ function Movies({ active, setActive }) {
       <div className="backgroundColor_grey">
         <HeaderMovies setActive={setActive} active={active} />
 
-        <SearchForm />
+        {/* <SearchForm 
+       value={valueSeach}
+        
+        /> */}
         <MoviesCardList 
+        
+        movies={movies}
         isButton="likes"
         inputButton="input"
         spanButton="button"/>

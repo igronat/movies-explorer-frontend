@@ -28,13 +28,15 @@ function App() {
   const [isError, setError] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
   const [userData, setUserData] = useState({});
+  const [movies, setMovies] = useState([]);
+  // const [value, setValue] = useState('')
   const history = useHistory();
 
   const token = localStorage.getItem("jwt");
 
   useEffect(() => {
     tokenCheck();
-  }, []);
+  }, [loggedIn]);
 
   useEffect(() => {
     if (loggedIn) {
@@ -45,24 +47,26 @@ function App() {
         })
         .catch((err) => console.log(`Ошибка профиля: ${err}`));
 
-       
+        moviesApi
+        .getInitialMovies(token)
+        .then((res) => {
+          setMovies(res);
+        })
+        .catch((err) => console.log(`Ошибка при добавлении фильмов: ${err}`));
     }
+       
+    
   }, [loggedIn]);
 
   const handleRegister = (name, email, password) => {
     return mainApi
       .register(name, email, password)
       .then((res) => {
+        console.log(res)
         if (res) {
-          setLoggedIn({
-            loggedIn: true,
-          });
-          handleSuccess();
-          history.push("/movies");
-        } else {
-          handleFailure();
-        }
-      })
+          handleLogin(email, password)
+      }
+    })
       .catch((err) => {
         console.log(`Ошибка регистрации пользователя: ${err}`);
       });
@@ -130,6 +134,7 @@ function App() {
       })
       .catch((err) => console.log(`Ошибка обновления профиля: ${err}`));
   };
+  
 
   const signOut = () => {
     localStorage.removeItem("token");
@@ -160,7 +165,7 @@ function App() {
   function componentMovies() {
     return (
       <>
-        <Movies active={menuActive} setActive={handleBurgerClick} />
+        <Movies active={menuActive} setActive={handleBurgerClick} movies={movies} />
       </>
     );
   }
