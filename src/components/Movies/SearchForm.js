@@ -1,25 +1,35 @@
 import React, { useState, useEffect } from "react";
 import FilterCheckbox from "./FilterCheckbox";
 
-function SearchForm({setValue} ) {
+function SearchForm({setValue, findMovies} ) {
 
-  
-
+  // const [searchTerm, setSearchTerm] = useState("");
+  // const [searchResults, setSearchResults] = useState([]);
 
   const seachMovies = (event) => {
     setValue(event.target.value);
     
 };
 
+function handleSubmit(e) {
+  // Запрещаем браузеру переходить по адресу формы
+  e.preventDefault();
+
+  // Передаём значения управляемых компонентов во внешний обработчик
+  findMovies()
+
+}
+
   return (
     <>
-      <div className="searchForm">
+      <form className="searchForm" onSubmit={handleSubmit}>
         <input onChange={seachMovies} className="searchForm__input" placeholder="Фильм" required></input>
-        <button className="searchForm__button">Найти</button>
-      </div>
+        <button type="submit" className="searchForm__button">Найти</button>
+      </form>
 
       <FilterCheckbox />
-    </>
+      
+    </> 
   );
 }
 

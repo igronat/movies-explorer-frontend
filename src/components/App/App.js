@@ -28,7 +28,7 @@ function App() {
   const [isError, setError] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
   const [userData, setUserData] = useState({});
-  const [movies, setMovies] = useState([]);
+  // const [movies, setMovies] = useState([]);
   // const [value, setValue] = useState('')
   const history = useHistory();
 
@@ -46,16 +46,15 @@ function App() {
           setCurrentUser(user);
         })
         .catch((err) => console.log(`Ошибка профиля: ${err}`));
-
-        moviesApi
-        .getInitialMovies(token)
-        .then((res) => {
-          setMovies(res);
-        })
-        .catch((err) => console.log(`Ошибка при добавлении фильмов: ${err}`));
+        // moviesApi
+        // .getInitialMovies(token)
+        // .then((res) => {
+        //   setMovies(res);
+        // })
+        // .catch((err) => console.log(`Ошибка при добавлении фильмов: ${err}`));
+       
     }
        
-    
   }, [loggedIn]);
 
   const handleRegister = (name, email, password) => {
@@ -136,6 +135,7 @@ function App() {
   };
   
 
+
   const signOut = () => {
     localStorage.removeItem("token");
     history.push("/");
@@ -162,10 +162,16 @@ function App() {
     setError(false)
   };
 
+  const onClickSeachMovies = () => {
+   
+  }
+
   function componentMovies() {
     return (
       <>
-        <Movies active={menuActive} setActive={handleBurgerClick} movies={movies} />
+        <Movies active={menuActive} setActive={handleBurgerClick} 
+        // movies={movies}
+         />
       </>
     );
   }

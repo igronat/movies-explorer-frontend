@@ -1,37 +1,38 @@
-import React, { useState, useEffect }  from "react";
+import React, { useState, useEffect } from "react";
 import MoviesCard from "./MoviesCard";
 import SearchForm from "./SearchForm";
 
-function MoviesCardList({isButton, inputButton,spanButton, movies,}) {
+function MoviesCardList({ isButton, inputButton, spanButton, movies, findMovies }) {
+  const [value, setValue] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
 
-  const [value, setValue] = useState('')
+  useEffect(() => {
+    const filteredMovies = movies.filter((movie) => {
+      return movie.nameRU.toLowerCase().includes(value.toLowerCase());
+    });
+    setSearchResults(filteredMovies)
+  }, [findMovies]);
 
-  const filteredMovies = movies.filter(movie => {
-    return movie.nameRU.toLowerCase().includes(value.toLowerCase())
-  })
+  // const filteredMovies = movies.filter((movie) => {
+  //   return movie.nameRU.toLowerCase().includes(value.toLowerCase());
+  // });
 
   return (
     <>
-    <SearchForm 
-       setValue={setValue}
-        
-        />
-    <section className="moviesCardList">
-      {filteredMovies.map((movie) => (
-        <MoviesCard 
-        movie={movie}
-      isButton={isButton}
-      inputButton={inputButton}
-      spanButton={spanButton}
-      key={`movie${movie.id}`}/>
-      ))}
-      
-    </section>
-
+      <SearchForm setValue={setValue} findMovies={findMovies}/>
+      <section className="moviesCardList">
+        {searchResults.map((movie) => (
+          <MoviesCard
+            movie={movie}
+            isButton={isButton}
+            inputButton={inputButton}
+            spanButton={spanButton}
+            key={`movie${movie.id}`}
+          />
+        ))}
+      </section>
     </>
-    
   );
-  
 }
 
 export default MoviesCardList;
