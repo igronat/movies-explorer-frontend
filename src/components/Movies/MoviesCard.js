@@ -1,6 +1,7 @@
 import React from "react";
 import Film from "../../images/film.jpg";
 
+
 function MoviesCard({movie, isButton, inputButton, spanButton}) {
 
   function getTime(duration) {
