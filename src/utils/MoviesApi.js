@@ -46,21 +46,7 @@ class MoviesApi {
       }).then((res) => this._handleResponse(res));
     }
   
-//     // добавляем новую карточку
-//     addCard(data, token) {
-//       return fetch(`${this._address}/movies`, {
-//         method: "POST",
-//         headers: {
-//           Authorization: `Bearer ${token}`,
-//           "Content-Type": "application/json",
-//         },
-//         body: JSON.stringify({
-//           name: data.name,
-//           link: data.link,
-//           id: data.id,
-//         }),
-//       }).then(this._handleResponse);
-//     }
+    
   
 //     // отправляем информацию об удалении карточки
 //     deleteCard(id, token) {
@@ -73,7 +59,7 @@ class MoviesApi {
 //       }).then(this._handleResponse);
 //     }
   
-//     // отправляем информацию о лайке
+//    // отправляем информацию о лайке
 //     changeLikeCardStatus(id, isLiked, token) {
 //       return fetch(`${this._address}/cards/${id}/likes`, {
 //         method: `${isLiked ? "DELETE" : "PUT"}`,

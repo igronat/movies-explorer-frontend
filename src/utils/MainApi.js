@@ -75,3 +75,50 @@ export const editProfile = (data, token) => {
     }).then(checkResponse);
     
   }
+
+  export const addSavedMovies = (data, token) => {
+    return fetch(`${BASE_URL}/movies`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        country: data.country,
+        director: data.director,
+        duration: data.duration,
+        year: data.year,
+        description: data.description,
+        image: `https://api.nomoreparties.co/${data.image.url}`,
+        trailerLink: data.trailerLink,
+        nameRU: data.nameRU,
+        nameEN: data.nameEN,
+        movieId: data.id,
+        thumbnail: `https://api.nomoreparties.co/${data.image.formats.thumbnail.url}`
+      }),
+    }).then(checkResponse);
+  }
+
+    export const getSavedMovies = (token) => {
+      return fetch(`${BASE_URL}/movies`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        
+      }).then(checkResponse);
+    
+  }
+
+  export const deleteSavedMovie = (movieId, token) => {
+    return fetch(`${BASE_URL}/movies/${movieId}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      
+    }).then(checkResponse);
+  
+}

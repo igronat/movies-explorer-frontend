@@ -33,3 +33,7 @@
 .moviesCard__button:before {
   border-radius: 50%;
 }
+
+.moviesCard__button_type_active:before {
+  background-color: #2be080;
+}

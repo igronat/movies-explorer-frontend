@@ -25,9 +25,10 @@ function App() {
   });
   const [isSuccess, setSuccess] = useState(false);
   const [isFailure, setFailure] = useState(false);
-  const [isError, setError] = useState(false);
+  const [isError, setIsError] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
   const [userData, setUserData] = useState({});
+  const [savedMovies, setSavedMovies] = useState([]);
   // const [movies, setMovies] = useState([]);
   // const [value, setValue] = useState('')
   const history = useHistory();
@@ -46,12 +47,12 @@ function App() {
           setCurrentUser(user);
         })
         .catch((err) => console.log(`Ошибка профиля: ${err}`));
-        // moviesApi
-        // .getInitialMovies(token)
-        // .then((res) => {
-        //   setMovies(res);
-        // })
-        // .catch((err) => console.log(`Ошибка при добавлении фильмов: ${err}`));
+        mainApi
+        .getSavedMovies(token)
+        .then((res) => {
+          setSavedMovies(res)
+        })
+        .catch((err) => console.log(`Ошибка загрузки сохраненных фильмов: ${err}`));
        
     }
        
@@ -153,24 +154,81 @@ function App() {
   };
 
   const handleError = () => {
-    setError(true);
+    setIsError(true);
   };
 
   const closeAllPopups = () => {
     setSuccess(false);
     setFailure(false);
-    setError(false)
+    setIsError(false)
   };
 
-  const onClickSeachMovies = () => {
-   
-  }
+  const [movies, setMovies] = useState([]);
+  const [preloader, setPreloader] = useState(undefined); 
+  const [error, setError] = useState(''); 
+  const [value, setValue] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
+
+  const findMovies = () => {
+    setPreloader(true);
+    moviesApi
+        .getInitialMovies()
+        .then( (res) => {
+          setMovies(res);
+          localStorage.setItem('movies', JSON.stringify(res))
+          setPreloader(false)
+          setSearchResults(res.filter((movie) => {
+            return movie.nameRU.toLowerCase().includes(value.toLowerCase());
+            
+         }))
+        })
+        .catch((err) => {
+          setPreloader(false)
+          setError(err)
+          console.log(`Ошибка при получении фильмов: ${err}`)});
+      }
+
+  console.log(savedMovies)
+ 
+  const addSavedMovies = (movie) => {
+    mainApi
+        .addSavedMovies(movie, token)
+        .then((data) => {
+          setSavedMovies([...savedMovies, data]);
+          localStorage.setItem('savedmovies', JSON.stringify([...savedMovies, data]))
+         
+        })
+        .catch((err) => {
+          console.log(`Ошибка при сохранении фильма: ${err}`)});
+      }
+
+      const deleteSavedMovie = (movie) => {
+        const deleteMovie = savedMovies.find((i) => i.movieId === movie.movieId)
+        console.log(deleteMovie)
+        mainApi
+            .deleteSavedMovie(deleteMovie._id, token)
+            .then(() => {
+              setSavedMovies(savedMovies.filter((i) => i._id !== deleteMovie._id));
+              localStorage.setItem('savedmovies', JSON.stringify(savedMovies))
+             
+            })
+            .catch((err) => {
+              console.log(`Ошибка при удалении фильма: ${err}`)});
+          }
 
   function componentMovies() {
     return (
       <>
-        <Movies active={menuActive} setActive={handleBurgerClick} 
-        // movies={movies}
+        <Movies active={menuActive} setActive={handleBurgerClick} addSavedMovies={addSavedMovies}
+        searchResults={searchResults}
+        setValue={setValue}
+        error={error}
+        preloader={preloader}
+        findMovies={findMovies}
+        movies={movies}
+        savedMovies={savedMovies}
+        deleteSavedMovie={deleteSavedMovie}
+        
          />
       </>
     );
@@ -179,7 +237,7 @@ function App() {
   function componentSavedMovies() {
     return (
       <>
-        <SavedMovies active={menuActive} setActive={handleBurgerClick} />
+        <SavedMovies active={menuActive} setActive={handleBurgerClick} savedMovies={savedMovies} deleteSavedMovie={deleteSavedMovie}/>
       </>
     );
   }

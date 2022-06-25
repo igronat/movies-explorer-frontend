@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import FilterCheckbox from "./FilterCheckbox";
 
 function SearchForm({setValue, findMovies} ) {
-
+ //const [value, setValue] = useState("");
   // const [searchTerm, setSearchTerm] = useState("");
   // const [searchResults, setSearchResults] = useState([]);
 

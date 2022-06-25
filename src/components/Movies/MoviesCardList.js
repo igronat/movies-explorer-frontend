@@ -1,24 +1,35 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import MoviesCard from "./MoviesCard";
 import SearchForm from "./SearchForm";
 import Preloader from "./Preloader";
 import More from "./More";
 
-function MoviesCardList({ isButton, inputButton, spanButton, movies, findMovies, preloader, error, setValue, searchResults }) {
+
+function MoviesCardList({ findMovies, preloader, error, setValue, searchResults, addSavedMovies, savedMovies, deleteSavedMovie }) {
  
  const [moviesCount, setMoviesCount] = useState(0);
 
   useEffect(() => {
     handleMoviesCount()
+    
   }, [window.innerWidth])
+
+  const timeout = useCallback(() => {
+   const timer = setTimeout(() => {
+    handleMoviesCount()
+  }, 2000);
+  return () => {
+    clearTimeout(timer)
+  }
+}, [])
 
   useEffect(() => {
     
-    window.addEventListener('resize', handleMoviesCount)
+    window.addEventListener('resize', timeout)
     return () => {
-      window.removeEventListener('resize', handleMoviesCount)
+      window.removeEventListener('resize', () => timeout)
     }
-  })
+  }, [timeout])
 
 
   const hadleResults = () => {
@@ -34,12 +45,13 @@ function MoviesCardList({ isButton, inputButton, spanButton, movies, findMovies,
   
   const isLodingMovies = searchResults.map((movie) => (
     <MoviesCard
+    addSavedMovies={addSavedMovies}
       movie={movie}
-      isButton={isButton}
-      inputButton={inputButton}
-      spanButton={spanButton}
       key={`movie${movie.id}`}
+      savedMovies={savedMovies}
+      deleteSavedMovie={deleteSavedMovie}
     />
+   
   )).slice(0, moviesCount)
 
 // console.log(moviesCount)
@@ -59,17 +71,32 @@ function MoviesCardList({ isButton, inputButton, spanButton, movies, findMovies,
     }
   }
 
+  const handleClickMore = () => {
+    if (window.innerWidth >= 320) {
+      setMoviesCount(moviesCount + 5)
+    }
+    if (window.innerWidth >= 768) {
+      setMoviesCount(moviesCount + 2)
+    }
+    if (window.innerWidth >= 1028) {
+      setMoviesCount(moviesCount + 3)
+    }
+    if (window.innerWidth >= 1280) {
+      setMoviesCount(moviesCount + 4)
+    }
+  }
+
 
   return (
     <>
       <SearchForm setValue={setValue} findMovies={findMovies}/>
-      {/* <Preloader preloader={preloader}/> */}
+     
       <section className="moviesCardList">
   
         {preloader ? <Preloader/> : hadleResults()}
 
       </section>
-      <More />
+      <More handleClickMore={handleClickMore} searchResults={searchResults} isLodingMovies={isLodingMovies}/>
     </>
   );
 }
