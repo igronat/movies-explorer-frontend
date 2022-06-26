@@ -8,12 +8,10 @@ import Register from "../Register";
 import Login from "../Login";
 import PageNotFound from "../PageNotFound";
 import InfoTooltip from "../InfoTooltip";
-// import api from "../../utils/Api";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext.js";
 import * as mainApi from "../../utils/MainApi";
 import moviesApi from "../../utils/MoviesApi";
 import ProtectedRoute from "../ProtectedRoute";
-
 import ok from "../../images/ok.jpg";
 import bad from "../../images/bad.jpg";
 
@@ -29,8 +27,12 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [userData, setUserData] = useState({});
   const [savedMovies, setSavedMovies] = useState([]);
-  // const [movies, setMovies] = useState([]);
-  // const [value, setValue] = useState('')
+  const [isLoading, setIsLoading] = useState(false);
+  const [movies, setMovies] = useState([]);
+  const [error, setError] = useState("");
+  const [value, setValue] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
+
   const history = useHistory();
 
   const token = localStorage.getItem("jwt");
@@ -47,26 +49,36 @@ function App() {
           setCurrentUser(user);
         })
         .catch((err) => console.log(`Ошибка профиля: ${err}`));
-        mainApi
+    }
+  }, [loggedIn]);
+
+  useEffect(() => {
+    if (loggedIn) {
+      mainApi
         .getSavedMovies(token)
         .then((res) => {
-          setSavedMovies(res)
+          const userSavedMovie = res.filter(
+            (movie) => movie.owner === currentUser._id
+          );
+
+          setSavedMovies(userSavedMovie);
+          localStorage.setItem("saved-movie", JSON.stringify(res));
         })
-        .catch((err) => console.log(`Ошибка загрузки сохраненных фильмов: ${err}`));
-       
+        .catch((err) => {
+          setError(err);
+          console.log(`Ошибка загрузки сохраненных фильмов: ${err}`);
+        });
     }
-       
-  }, [loggedIn]);
+  }, [loggedIn, currentUser]);
 
   const handleRegister = (name, email, password) => {
     return mainApi
       .register(name, email, password)
       .then((res) => {
-        console.log(res)
         if (res) {
-          handleLogin(email, password)
-      }
-    })
+          handleLogin(email, password);
+        }
+      })
       .catch((err) => {
         console.log(`Ошибка регистрации пользователя: ${err}`);
       });
@@ -76,7 +88,7 @@ function App() {
     return mainApi
       .authorize(email, password)
       .then((res) => {
-          if (res) {
+        if (res) {
           setLoggedIn({
             loggedIn: true,
           });
@@ -85,27 +97,12 @@ function App() {
         } else {
           handleError();
         }
-        
       })
       .catch((err) => {
         handleFailure();
         console.log(`Ошибка авторизации пользователя: ${err}`);
       });
   };
-
-  // const handleProfile = (email, name) => {
-  //   return mainApi
-  //     .getContent(token)
-  //     .then((res) => {
-  //       const userData = { email, name };
-  //       setUserData(userData);
-  //     })
-
-  //     .catch((err) => {
-  //       handleFailure();
-  //       console.log(`Ошибка авторизации пользователя: ${err}`);
-  //     });
-  // };
 
   function tokenCheck() {
     if (localStorage.getItem("token")) {
@@ -134,11 +131,31 @@ function App() {
       })
       .catch((err) => console.log(`Ошибка обновления профиля: ${err}`));
   };
-  
-
 
   const signOut = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("saved-movies");
+    localStorage.removeItem("checkBox");
+    localStorage.removeItem("movies");
+    localStorage.removeItem("jwt");
+    localStorage.removeItem("token");
+    setIsLoading(false);
+    setMenuActive(false);
+    setCurrentUser({
+      name: "",
+      email: "",
+    });
+    setSuccess(false);
+    setFailure(false);
+    setIsError(false);
+    setLoggedIn(false);
+    setUserData({});
+    setSavedMovies([]);
+    setIsLoading(false);
+    setMovies([]);
+    setError("");
+    setValue("");
+    setSearchResults([]);
     history.push("/");
   };
 
@@ -160,76 +177,80 @@ function App() {
   const closeAllPopups = () => {
     setSuccess(false);
     setFailure(false);
-    setIsError(false)
+    setIsError(false);
   };
 
-  const [movies, setMovies] = useState([]);
-  const [preloader, setPreloader] = useState(undefined); 
-  const [error, setError] = useState(''); 
-  const [value, setValue] = useState("");
-  const [searchResults, setSearchResults] = useState([]);
-
   const findMovies = () => {
-    setPreloader(true);
+    setIsLoading(true);
     moviesApi
-        .getInitialMovies()
-        .then( (res) => {
-          setMovies(res);
-          localStorage.setItem('movies', JSON.stringify(res))
-          setPreloader(false)
-          setSearchResults(res.filter((movie) => {
+      .getInitialMovies()
+      .then((res) => {
+        setMovies(res);
+        localStorage.setItem("movies", JSON.stringify(res));
+        setIsLoading(false);
+        setSearchResults(
+          res.filter((movie) => {
             return movie.nameRU.toLowerCase().includes(value.toLowerCase());
-            
-         }))
-        })
-        .catch((err) => {
-          setPreloader(false)
-          setError(err)
-          console.log(`Ошибка при получении фильмов: ${err}`)});
-      }
+          })
+        );
+      })
+      .catch((err) => {
+        setIsLoading(false);
+        setError(err);
+        console.log(`Ошибка при получении фильмов: ${err}`);
+      });
+  };
 
-  console.log(savedMovies)
- 
-  const addSavedMovies = (movie) => {
+  const savedNewMovies = (movie) => {
+    setLoggedIn({
+      loggedIn: true,
+    });
     mainApi
-        .addSavedMovies(movie, token)
-        .then((data) => {
-          setSavedMovies([...savedMovies, data]);
-          localStorage.setItem('savedmovies', JSON.stringify([...savedMovies, data]))
-         
-        })
-        .catch((err) => {
-          console.log(`Ошибка при сохранении фильма: ${err}`)});
-      }
+      .addSavedMovies(movie, token)
+      .then((data) => {
+        setSavedMovies([...savedMovies, data]);
+        localStorage.setItem(
+          "saved-movies",
+          JSON.stringify([...savedMovies, data])
+        );
+      })
+      .catch((err) => {
+        setError(err);
+        console.log(`Ошибка при сохранении фильма: ${err}`);
+      });
+  };
 
-      const deleteSavedMovie = (movie) => {
-        const deleteMovie = savedMovies.find((i) => i.movieId === movie.movieId)
-        console.log(deleteMovie)
-        mainApi
-            .deleteSavedMovie(deleteMovie._id, token)
-            .then(() => {
-              setSavedMovies(savedMovies.filter((i) => i._id !== deleteMovie._id));
-              localStorage.setItem('savedmovies', JSON.stringify(savedMovies))
-             
-            })
-            .catch((err) => {
-              console.log(`Ошибка при удалении фильма: ${err}`)});
-          }
+  const deleteSavedMovie = (movie) => {
+    const deleteMovie = savedMovies.find((i) => i.movieId === movie.movieId);
+
+    mainApi
+      .deleteSavedMovie(deleteMovie._id, token)
+      .then(() => {
+        setSavedMovies(savedMovies.filter((i) => i._id !== deleteMovie._id));
+        localStorage.setItem("saved-movies", JSON.stringify(savedMovies));
+      })
+      .catch((err) => {
+        console.log(`Ошибка при удалении фильма: ${err}`);
+      });
+  };
 
   function componentMovies() {
     return (
       <>
-        <Movies active={menuActive} setActive={handleBurgerClick} addSavedMovies={addSavedMovies}
-        searchResults={searchResults}
-        setValue={setValue}
-        error={error}
-        preloader={preloader}
-        findMovies={findMovies}
-        movies={movies}
-        savedMovies={savedMovies}
-        deleteSavedMovie={deleteSavedMovie}
-        
-         />
+        <Movies
+          active={menuActive}
+          setActive={handleBurgerClick}
+          addSavedMovies={savedNewMovies}
+          searchResults={searchResults}
+          setValue={setValue}
+          value={value}
+          error={error}
+          findMovies={findMovies}
+          movies={movies}
+          savedMovies={savedMovies}
+          deleteSavedMovie={deleteSavedMovie}
+          isLoading={isLoading}
+        />
       </>
     );
   }
@@ -237,7 +258,14 @@ function App() {
   function componentSavedMovies() {
     return (
       <>
-        <SavedMovies active={menuActive} setActive={handleBurgerClick} savedMovies={savedMovies} deleteSavedMovie={deleteSavedMovie}/>
+        <SavedMovies
+          active={menuActive}
+          setActive={handleBurgerClick}
+          savedMovies={savedMovies}
+          deleteSavedMovie={deleteSavedMovie}
+          isLoading={isLoading}
+          error={error}
+        />
       </>
     );
   }
@@ -245,7 +273,13 @@ function App() {
   function componentProfile() {
     return (
       <>
-        <Profile active={menuActive} setActive={handleBurgerClick} userData={currentUser} signOut={signOut} onUpdateUser={handleUpdateUser}/>
+        <Profile
+          active={menuActive}
+          setActive={handleBurgerClick}
+          userData={currentUser}
+          signOut={signOut}
+          onUpdateUser={handleUpdateUser}
+        />
       </>
     );
   }
@@ -307,7 +341,7 @@ function App() {
         onClose={closeAllPopups}
       />
 
-<InfoTooltip
+      <InfoTooltip
         name="error"
         img={bad}
         title="Почта и/или пароль неверные"
