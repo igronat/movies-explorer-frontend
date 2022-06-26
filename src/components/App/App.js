@@ -62,14 +62,14 @@ function App() {
           );
 
           setSavedMovies(userSavedMovie);
-          localStorage.setItem("saved-movie", JSON.stringify(res));
+          localStorage.setItem("saved-movie", JSON.stringify(userSavedMovie));
         })
         .catch((err) => {
           setError(err);
           console.log(`Ошибка загрузки сохраненных фильмов: ${err}`);
         });
     }
-  }, [loggedIn, currentUser]);
+  }, [currentUser]);
 
   const handleRegister = (name, email, password) => {
     return mainApi
