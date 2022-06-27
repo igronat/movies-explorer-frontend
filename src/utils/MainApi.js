@@ -1,4 +1,4 @@
-export const BASE_URL = "http://igronat.back.nomoreparties.sbs";
+export const BASE_URL = "https://igronat.back.nomoreparties.sbs";
 
 const checkResponse = (response) => {
     try {
