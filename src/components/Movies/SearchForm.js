@@ -1,7 +1,6 @@
 import React from "react";
-import FilterCheckbox from "./FilterCheckbox";
 
-function SearchForm({ setValue, value, findMovies, clickCheckbox, shortFilm }) {
+function SearchForm({ setValue, value, findMovies }) {
   const seachMovies = (event) => {
     setValue(event.target.value);
   };
@@ -29,8 +28,6 @@ function SearchForm({ setValue, value, findMovies, clickCheckbox, shortFilm }) {
           Найти
         </button>
       </form>
-
-      <FilterCheckbox clickCheckbox={clickCheckbox} shortFilm={shortFilm} />
     </>
   );
 }

@@ -3,6 +3,7 @@ import HeaderMovies from "../HeaderMovies";
 import SearchForm from "../Movies/SearchForm";
 import MoviesCard from "../Movies/MoviesCard";
 import Preloader from "../Movies/Preloader";
+import FilterCheckbox from "../Movies/FilterCheckbox";
 
 import Footer from "../Footer";
 
@@ -13,16 +14,18 @@ function SavedMovies({
   deleteSavedMovie,
   isLoading,
   error,
+  clickCheckbox,
+  checkbox
 }) {
   const [value, setValue] = useState("");
-  const [checkbox, setCheckbox] = useState(false);
+  // const [checkbox, setCheckbox] = useState(false);
   const [searchResults, setSearchResults] = useState([]);
   const [search, setSearch] = useState(false);
 
-  const clickCheckbox = () => {
-    setCheckbox(!checkbox);
-    localStorage.setItem("checkBox", !checkbox);
-  };
+  // const clickCheckbox = () => {
+  //   setCheckbox(!checkbox);
+  //   localStorage.setItem("checkBox", !checkbox);
+  // };
 
   const shortFilms = savedMovies
     .filter((i) => i.duration <= 40)
@@ -98,6 +101,7 @@ function SavedMovies({
 
     return shortFilms;
   };
+  console.log(savedMovies)
 
   const hadleSearchShotFilmsResults = () => {
     if (searchShortFilms.length === 0) {
@@ -116,7 +120,8 @@ function SavedMovies({
           findMovies={findSavedMovies}
           clickCheckbox={clickCheckbox}
         />
-
+        
+        <FilterCheckbox clickCheckbox={clickCheckbox} checkbox={checkbox} />
         <section className="moviesCardList">
           {isLoading && <Preloader />}
           {!isLoading &&

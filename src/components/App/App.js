@@ -24,14 +24,18 @@ function App() {
   const [isSuccess, setSuccess] = useState(false);
   const [isFailure, setFailure] = useState(false);
   const [isError, setIsError] = useState(false);
+  const [isErrorSaveMovie, setIsErrorSaveMovie] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
   const [userData, setUserData] = useState({});
   const [savedMovies, setSavedMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [movies, setMovies] = useState([]);
   const [error, setError] = useState("");
+  const [errorSavedMovies, setErrorSavedMovies] = useState("");
   const [value, setValue] = useState("");
   const [searchResults, setSearchResults] = useState([]);
+  const [checkbox, setCheckbox] = useState(false);
+  const [checkboxSaveMovies, setCheckboxSaveMovies] = useState(false);
 
   const history = useHistory();
 
@@ -39,7 +43,7 @@ function App() {
 
   useEffect(() => {
     tokenCheck();
-  }, [loggedIn]);
+  }, []);
 
   useEffect(() => {
     if (loggedIn) {
@@ -49,6 +53,25 @@ function App() {
           setCurrentUser(user);
         })
         .catch((err) => console.log(`Ошибка профиля: ${err}`));
+    }
+  }, [loggedIn]);
+
+  useEffect(() => {
+    if (loggedIn) {
+      setIsLoading(true);
+      moviesApi
+        .getInitialMovies()
+        .then((res) => {
+          setMovies(res);
+          localStorage.setItem("movies", JSON.stringify(res));
+          localStorage.setItem("checkBox", JSON.stringify(true));
+          setIsLoading(false);
+        })
+        .catch((err) => {
+          setIsLoading(false);
+          setError(err);
+          console.log(`Ошибка при получении фильмов: ${err}`);
+        });
     }
   }, [loggedIn]);
 
@@ -65,7 +88,7 @@ function App() {
           localStorage.setItem("saved-movie", JSON.stringify(userSavedMovie));
         })
         .catch((err) => {
-          setError(err);
+          setErrorSavedMovies(err);
           console.log(`Ошибка загрузки сохраненных фильмов: ${err}`);
         });
     }
@@ -105,19 +128,16 @@ function App() {
   };
 
   function tokenCheck() {
-    if (localStorage.getItem("token")) {
-      let token = localStorage.getItem("token");
-      mainApi.getContent(token).then(({ data }) => {
+    let token = localStorage.getItem("jwt");
+    if (token) {
+      mainApi.getContent(token).then((data) => {
         if (data) {
           let userData = {
             email: data.email,
             id: data._id,
           };
           setUserData(userData);
-          setLoggedIn({
-            loggedIn: true,
-          });
-          history.push("/");
+          setLoggedIn(true);
         }
       });
     }
@@ -135,6 +155,9 @@ function App() {
   const signOut = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("saved-movies");
+    localStorage.removeItem("saved-movie");
+    localStorage.removeItem("seach-movies");
+    localStorage.removeItem("value");
     localStorage.removeItem("checkBox");
     localStorage.removeItem("movies");
     localStorage.removeItem("jwt");
@@ -174,37 +197,29 @@ function App() {
     setIsError(true);
   };
 
+  const handleErrorSaveMovie = () => {
+    setIsErrorSaveMovie(true);
+  };
+
   const closeAllPopups = () => {
     setSuccess(false);
     setFailure(false);
     setIsError(false);
+    setIsErrorSaveMovie(false);
   };
 
   const findMovies = () => {
-    setIsLoading(true);
-    moviesApi
-      .getInitialMovies()
-      .then((res) => {
-        setMovies(res);
-        localStorage.setItem("movies", JSON.stringify(res));
-        setIsLoading(false);
-        setSearchResults(
-          res.filter((movie) => {
-            return movie.nameRU.toLowerCase().includes(value.toLowerCase());
-          })
-        );
+    setSearchResults(
+      movies.filter((movie) => {
+        return movie.nameRU.toLowerCase().includes(value.toLowerCase());
       })
-      .catch((err) => {
-        setIsLoading(false);
-        setError(err);
-        console.log(`Ошибка при получении фильмов: ${err}`);
-      });
+    );
+    localStorage.setItem("seach-movies", JSON.stringify(searchResults));
+    localStorage.setItem("value", JSON.stringify(value));
+    localStorage.setItem("checkBox", JSON.stringify(checkbox));
   };
 
   const savedNewMovies = (movie) => {
-    setLoggedIn({
-      loggedIn: true,
-    });
     mainApi
       .addSavedMovies(movie, token)
       .then((data) => {
@@ -215,8 +230,8 @@ function App() {
         );
       })
       .catch((err) => {
-        setError(err);
         console.log(`Ошибка при сохранении фильма: ${err}`);
+        handleErrorSaveMovie();
       });
   };
 
@@ -232,6 +247,15 @@ function App() {
       .catch((err) => {
         console.log(`Ошибка при удалении фильма: ${err}`);
       });
+  };
+
+  const clickCheckbox = () => {
+    setCheckbox(!checkbox);
+    localStorage.setItem("checkBox", !checkbox);
+  };
+
+  const clickCheckboxSaveMovies = () => {
+    setCheckboxSaveMovies(!checkboxSaveMovies);
   };
 
   function componentMovies() {
@@ -250,6 +274,8 @@ function App() {
           savedMovies={savedMovies}
           deleteSavedMovie={deleteSavedMovie}
           isLoading={isLoading}
+          clickCheckbox={clickCheckbox}
+          checkbox={checkbox}
         />
       </>
     );
@@ -264,7 +290,9 @@ function App() {
           savedMovies={savedMovies}
           deleteSavedMovie={deleteSavedMovie}
           isLoading={isLoading}
-          error={error}
+          error={errorSavedMovies}
+          clickCheckbox={clickCheckboxSaveMovies}
+          checkbox={checkboxSaveMovies}
         />
       </>
     );
@@ -288,7 +316,11 @@ function App() {
     <CurrentUserContext.Provider value={currentUser}>
       <Switch>
         <Route exact path="/">
-          <Main />
+          <Main
+            active={menuActive}
+            setActive={handleBurgerClick}
+            loggedIn={loggedIn}
+          />
         </Route>
 
         <ProtectedRoute
@@ -346,6 +378,14 @@ function App() {
         img={bad}
         title="Почта и/или пароль неверные"
         isOpen={isError}
+        onClose={closeAllPopups}
+      />
+
+      <InfoTooltip
+        name="errorSaveMovie"
+        img={bad}
+        title="Этот фильм нельзя сохранить"
+        isOpen={isErrorSaveMovie}
         onClose={closeAllPopups}
       />
     </CurrentUserContext.Provider>

@@ -3,6 +3,7 @@ import MoviesCard from "./MoviesCard";
 import SearchForm from "./SearchForm";
 import Preloader from "./Preloader";
 import More from "./More";
+import FilterCheckbox from "./FilterCheckbox";
 
 function MoviesCardList({
   isLoading,
@@ -14,10 +15,11 @@ function MoviesCardList({
   addSavedMovies,
   savedMovies,
   deleteSavedMovie,
+  checkbox,
+  clickCheckbox,
 }) {
+
   const [moviesCount, setMoviesCount] = useState(0);
-  const [checkbox, setCheckbox] = useState(false);
-  const [isShortFilm, setIsShortFilm] = useState(false);
 
   useEffect(() => {
     handleMoviesCount();
@@ -97,11 +99,6 @@ function MoviesCardList({
     }
   };
 
-  const clickCheckbox = () => {
-    setCheckbox(!checkbox);
-    localStorage.setItem("checkBox", !checkbox);
-  };
-
   const shortFilms = searchResults
     .filter((i) => i.duration <= 40)
     .map((movie) => (
@@ -128,8 +125,10 @@ function MoviesCardList({
         value: value,
         findMovies: findMovies,
         clickCheckbox: clickCheckbox,
-        shortFilms: isShortFilm,
+        checkbox: checkbox,
       })}
+
+      <FilterCheckbox clickCheckbox={clickCheckbox} checkbox={checkbox} />
 
       <section className="moviesCardList">
         {isLoading && <Preloader />}

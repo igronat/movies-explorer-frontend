@@ -1,33 +1,27 @@
 export const BASE_URL = "https://igronat.back.nomoreparties.sbs";
 
 const checkResponse = (response) => {
-    try {
-      if (response.status === 201) {
-        return response.json();
-      }
-      if (response.status === 200) {
-        return response.json();
-      }
-    } catch (e) {
-      return e;
-    }
-  };
-  
-  export const register = (name, email, password) => {
-    return fetch(`${BASE_URL}/signup`, {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ name, email, password }),
+    if (response.ok) {
+      return response.json();
+    
+  } throw new Error({ status: response.status });
+};
+
+export const register = (name, email, password) => {
+  return fetch(`${BASE_URL}/signup`, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ name, email, password }),
+  })
+    .then(checkResponse)
+    .then((res) => {
+      return res;
     })
-      .then(checkResponse)
-      .then((res) => {
-        return res;
-      })
-      .catch((err) => console.log(err));
-  };
+    .catch((err) => console.log(err));
+};
 
 export const authorize = (email, password) => {
   return fetch(`${BASE_URL}/signin`, {
@@ -56,69 +50,62 @@ export const getContent = (token) => {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
-  })
-    .then((res) => res.json())
-    .then((data) => data);
+  }).then(checkResponse);
 };
 
 export const editProfile = (data, token) => {
-    return fetch(`${BASE_URL}/users/me`, {
-      method: "PATCH",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name: data.name,
-        email: data.email,
-      }),
-    }).then(checkResponse);
-    
-  }
+  return fetch(`${BASE_URL}/users/me`, {
+    method: "PATCH",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      name: data.name,
+      email: data.email,
+    }),
+  }).then(checkResponse);
+};
 
-  export const addSavedMovies = (data, token) => {
-    return fetch(`${BASE_URL}/movies`, {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        country: data.country,
-        director: data.director,
-        duration: data.duration,
-        year: data.year,
-        description: data.description,
-        image: `https://api.nomoreparties.co/${data.image.url}`,
-        trailerLink: data.trailerLink,
-        nameRU: data.nameRU,
-        nameEN: data.nameEN,
-        movieId: data.id,
-        thumbnail: `https://api.nomoreparties.co/${data.image.formats.thumbnail.url}`
-      }),
-    }).then(checkResponse);
-  }
+export const addSavedMovies = (data, token) => {
+  return fetch(`${BASE_URL}/movies`, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      country: data.country,
+      director: data.director,
+      duration: data.duration,
+      year: data.year,
+      description: data.description,
+      image: `https://api.nomoreparties.co/${data.image.url}`,
+      trailerLink: data.trailerLink,
+      nameRU: data.nameRU,
+      nameEN: data.nameEN,
+      movieId: data.id,
+      thumbnail: `https://api.nomoreparties.co/${data.image.formats.thumbnail.url}`,
+    }),
+  }).then(checkResponse);
+};
 
-    export const getSavedMovies = (token) => {
-      return fetch(`${BASE_URL}/movies`, {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-        
-      }).then(checkResponse);
-    
-  }
+export const getSavedMovies = (token) => {
+  return fetch(`${BASE_URL}/movies`, {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+  }).then(checkResponse);
+};
 
-  export const deleteSavedMovie = (movieId, token) => {
-    return fetch(`${BASE_URL}/movies/${movieId}`, {
-      method: "DELETE",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-      
-    }).then(checkResponse);
-  
-}
+export const deleteSavedMovie = (movieId, token) => {
+  return fetch(`${BASE_URL}/movies/${movieId}`, {
+    method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+  }).then(checkResponse);
+};

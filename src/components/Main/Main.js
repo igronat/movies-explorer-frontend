@@ -5,11 +5,13 @@ import AboutProject from "./AboutProject";
 import Techs from "./Techs";
 import AboutMe from "./AboutMe";
 import Footer from "../Footer";
+import HeaderMovies from "../HeaderMovies";
 
-function Main() {
+function Main({active, setActive, loggedIn}) {
   return (
     <>
-      <HeaderMain ability="disability" />
+    {loggedIn ? <HeaderMovies setActive={setActive} active={active} /> : <HeaderMain ability="disability" />}
+      
       <Promo />
       <AboutProject />
       <Techs />

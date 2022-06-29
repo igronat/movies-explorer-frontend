@@ -19,13 +19,10 @@ function Profile({ active, setActive, userData, signOut, onUpdateUser }) {
       setEmail(currentUser.email);
     }
   }, [currentUser]);
- 
+
   useEffect(() => {
     if (nameError || emailError) {
       setformValid(false);
-      if (currentUser.name === name && currentUser.email === email) {
-        setformValid(false);
-      }
       if (currentUser.name !== name && currentUser.email === email) {
         setformValid(true);
       }
@@ -33,9 +30,13 @@ function Profile({ active, setActive, userData, signOut, onUpdateUser }) {
         setformValid(true);
       }
     } else {
-      setformValid(true);
+      if (currentUser.name === name && currentUser.email === email) {
+        setformValid(false);
+      } else {
+        setformValid(true);
+      }
     }
-  }, [nameError, emailError]);
+  }, [nameError, emailError, name, email]);
 
   const handlerBlur = (e) => {
     switch (e.target.name) {

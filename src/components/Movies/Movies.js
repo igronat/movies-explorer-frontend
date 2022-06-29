@@ -17,7 +17,12 @@ function Movies({
   movies,
   savedMovies,
   deleteSavedMovie,
-}) {
+  checkbox,
+  clickCheckbox
+})
+
+{ 
+
   return (
     <>
       <div className="backgroundColor_grey">
@@ -35,6 +40,9 @@ function Movies({
           isLoading={isLoading}
           setValue={setValue}
           value={value}
+          checkbox={checkbox}
+  clickCheckbox={clickCheckbox}
+          
         />
 
         <Footer />

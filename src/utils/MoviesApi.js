@@ -11,31 +11,6 @@ class MoviesApi {
       return Promise.reject(`Ошибка: ${res.status}`);
     }
   
-    // // получаем информацию профиля
-    // getProfileInfo(token) {
-    //   return fetch(`${this._address}/profile`, {
-    //     headers: {
-    //       Authorization: `Bearer ${token}`,
-    //       "Content-Type": "application/json",
-    //     },
-    //   }).then(this._handleResponse);
-    // }
-  
-    // // отправляем информацию об изменении профиля
-    // editProfile(data, token) {
-    //   return fetch(`${this._address}/profile`, {
-    //     method: "PATCH",
-    //     headers: {
-    //       Authorization: `Bearer ${token}`,
-    //       "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify({
-    //       name: data.name,
-    //       about: data.about,
-    //     }),
-    //   }).then(this._handleResponse);
-    // }
-  
     // получаем карточки фильмов
     getInitialMovies(token) {
       return fetch(`${this._address}`, {
@@ -45,30 +20,7 @@ class MoviesApi {
         },
       }).then((res) => this._handleResponse(res));
     }
-  
-    
-  
-//     // отправляем информацию об удалении карточки
-//     deleteCard(id, token) {
-//       return fetch(`${this._address}/cards/${id}`, {
-//         method: "DELETE",
-//         headers: {
-//           Authorization: `Bearer ${token}`,
-//           "Content-Type": "application/json",
-//         },
-//       }).then(this._handleResponse);
-//     }
-  
-//    // отправляем информацию о лайке
-//     changeLikeCardStatus(id, isLiked, token) {
-//       return fetch(`${this._address}/cards/${id}/likes`, {
-//         method: `${isLiked ? "DELETE" : "PUT"}`,
-//         headers: {
-//           Authorization: `Bearer ${token}`,
-//           "Content-Type": "application/json",
-//         },
-//       }).then(this._handleResponse);
-//     }
+
  }
   
   // подключаем к серверу
