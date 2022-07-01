@@ -14,6 +14,7 @@ import moviesApi from "../../utils/MoviesApi";
 import ProtectedRoute from "../ProtectedRoute";
 import ok from "../../images/ok.jpg";
 import bad from "../../images/bad.jpg";
+import BlockRoute from "../BlockRouter";
 
 function App() {
   const [menuActive, setMenuActive] = useState(false);
@@ -25,6 +26,7 @@ function App() {
   const [isFailure, setFailure] = useState(false);
   const [isError, setIsError] = useState(false);
   const [isErrorSaveMovie, setIsErrorSaveMovie] = useState(false);
+  const [isUpdateUser, setIsUpdateUser] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
   const [userData, setUserData] = useState({});
   const [savedMovies, setSavedMovies] = useState([]);
@@ -32,10 +34,11 @@ function App() {
   const [movies, setMovies] = useState([]);
   const [error, setError] = useState("");
   const [errorSavedMovies, setErrorSavedMovies] = useState("");
-  const [value, setValue] = useState("");
   const [searchResults, setSearchResults] = useState([]);
+  const [searchResultsSavedMovies, setSearchResultsSavedMovies] = useState([]);
   const [checkbox, setCheckbox] = useState(false);
   const [checkboxSaveMovies, setCheckboxSaveMovies] = useState(false);
+  const [search, setSearch] = useState(false);
 
   const history = useHistory();
 
@@ -43,6 +46,12 @@ function App() {
 
   useEffect(() => {
     tokenCheck();
+  }, []);
+
+  // загружаем данные последнего поиска при перезагрузки страницы
+  useEffect(() => {
+    setSearchResults(JSON.parse(localStorage.getItem("seach-movies")));
+    setCheckbox(JSON.parse(localStorage.getItem("checkBox")));
   }, []);
 
   useEffect(() => {
@@ -64,7 +73,7 @@ function App() {
         .then((res) => {
           setMovies(res);
           localStorage.setItem("movies", JSON.stringify(res));
-          localStorage.setItem("checkBox", JSON.stringify(true));
+          localStorage.setItem("checkBox", JSON.stringify(false));
           setIsLoading(false);
         })
         .catch((err) => {
@@ -85,7 +94,7 @@ function App() {
           );
 
           setSavedMovies(userSavedMovie);
-          localStorage.setItem("saved-movie", JSON.stringify(userSavedMovie));
+          localStorage.setItem("saved-movies", JSON.stringify(userSavedMovie));
         })
         .catch((err) => {
           setErrorSavedMovies(err);
@@ -148,8 +157,12 @@ function App() {
       .editProfile(user, token)
       .then((res) => {
         setCurrentUser(res);
+        handleIsUpdateUser();
       })
-      .catch((err) => console.log(`Ошибка обновления профиля: ${err}`));
+      .catch((err) => {
+        console.log(`Ошибка обновления профиля: ${err}`);
+        handleFailure();
+      });
   };
 
   const signOut = () => {
@@ -162,6 +175,7 @@ function App() {
     localStorage.removeItem("movies");
     localStorage.removeItem("jwt");
     localStorage.removeItem("token");
+    localStorage.removeItem("moviesCount");
     setIsLoading(false);
     setMenuActive(false);
     setCurrentUser({
@@ -177,8 +191,8 @@ function App() {
     setIsLoading(false);
     setMovies([]);
     setError("");
-    setValue("");
     setSearchResults([]);
+    setSearchResultsSavedMovies([])
     history.push("/");
   };
 
@@ -201,22 +215,35 @@ function App() {
     setIsErrorSaveMovie(true);
   };
 
+  const handleIsUpdateUser = () => {
+    setIsUpdateUser(true);
+  };
+
   const closeAllPopups = () => {
     setSuccess(false);
     setFailure(false);
     setIsError(false);
     setIsErrorSaveMovie(false);
+    setIsUpdateUser(false);
   };
 
-  const findMovies = () => {
-    setSearchResults(
-      movies.filter((movie) => {
-        return movie.nameRU.toLowerCase().includes(value.toLowerCase());
-      })
-    );
-    localStorage.setItem("seach-movies", JSON.stringify(searchResults));
+  function searchMovies(movies, value) {
+    return movies.filter((movie) => {
+      return movie.nameRU.toLowerCase().includes(value.toLowerCase());
+    });
+  }
+
+  const findMovies = (value) => {
+    setIsLoading(true);
+    const newSearchMovies = searchMovies(movies, value);
+    setSearchResults(newSearchMovies);
+    localStorage.setItem("seach-movies", JSON.stringify(newSearchMovies));
     localStorage.setItem("value", JSON.stringify(value));
     localStorage.setItem("checkBox", JSON.stringify(checkbox));
+    localStorage.setItem("moviesCount", JSON.stringify(0));
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
   };
 
   const savedNewMovies = (movie) => {
@@ -233,6 +260,19 @@ function App() {
         console.log(`Ошибка при сохранении фильма: ${err}`);
         handleErrorSaveMovie();
       });
+  };
+
+  const findSavedMovies = (value) => {
+    setIsLoading(true);
+    setSearchResultsSavedMovies(
+      savedMovies.filter((movie) => {
+        return movie.nameRU.toLowerCase().includes(value.toLowerCase());
+      })
+    );
+    setSearch(true);
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
   };
 
   const deleteSavedMovie = (movie) => {
@@ -265,9 +305,7 @@ function App() {
           active={menuActive}
           setActive={handleBurgerClick}
           addSavedMovies={savedNewMovies}
-          searchResults={searchResults}
-          setValue={setValue}
-          value={value}
+          searchResults={searchResults || []}
           error={error}
           findMovies={findMovies}
           movies={movies}
@@ -293,6 +331,10 @@ function App() {
           error={errorSavedMovies}
           clickCheckbox={clickCheckboxSaveMovies}
           checkbox={checkboxSaveMovies}
+          setIsLoading={setIsLoading}
+          findSavedMovies={findSavedMovies}
+          search={search}
+          searchResults={searchResultsSavedMovies}
         />
       </>
     );
@@ -310,6 +352,14 @@ function App() {
         />
       </>
     );
+  }
+
+  function componentLogin() {
+    return <Login handleLogin={handleLogin} />;
+  }
+
+  function componentRegister() {
+    return <Register handleRegister={handleRegister} />;
   }
 
   return (
@@ -344,13 +394,19 @@ function App() {
           loggedIn={loggedIn}
         />
 
-        <Route exact path="/signin">
-          <Login handleLogin={handleLogin} />
-        </Route>
+        <BlockRoute
+          exact
+          path="/signin"
+          loggedIn={loggedIn}
+          component={componentLogin}
+        />
 
-        <Route exact path="/signup">
-          <Register handleRegister={handleRegister} />
-        </Route>
+        <BlockRoute
+          exact
+          path="/signup"
+          loggedIn={loggedIn}
+          component={componentRegister}
+        />
 
         <Route path="*">
           <PageNotFound />
@@ -362,6 +418,14 @@ function App() {
         img={ok}
         title="Добро пожаловать!"
         isOpen={isSuccess}
+        onClose={closeAllPopups}
+      />
+
+      <InfoTooltip
+        name="ok"
+        img={ok}
+        title="Данные успешно изменены"
+        isOpen={isUpdateUser}
         onClose={closeAllPopups}
       />
 

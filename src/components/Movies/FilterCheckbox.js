@@ -1,7 +1,7 @@
-import React from "react";
+import React, {useEffect} from "react";
 
 function FilterCheckbox({ clickCheckbox, checkbox }) {
-  
+
   return (
     <div className="filterCheckbox">
       <label

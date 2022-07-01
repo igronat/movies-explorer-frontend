@@ -1,6 +1,18 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
+import { useLocation } from "react-router-dom";
 
-function SearchForm({ setValue, value, findMovies }) {
+function SearchForm({ findMovies }) {
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.pathname === "/movies") {
+    setValue(JSON.parse(localStorage.getItem("value")));
+   
+    }
+  }, []);
+
+  const [value, setValue] = useState('');
+
   const seachMovies = (event) => {
     setValue(event.target.value);
   };
@@ -10,16 +22,17 @@ function SearchForm({ setValue, value, findMovies }) {
     e.preventDefault();
 
     // Передаём значения управляемых компонентов во внешний обработчик
-    findMovies();
+    findMovies(value);
+   
   }
 
   return (
     <>
       <form className="searchForm" onSubmit={handleSubmit}>
         <input
-          autoFocus="autoFocus"
+          
           onChange={seachMovies}
-          value={value}
+          value={value || ''}
           className="searchForm__input"
           placeholder="Фильм"
           required

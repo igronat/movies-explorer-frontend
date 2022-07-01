@@ -4,13 +4,11 @@ import MoviesCardList from "./MoviesCardList";
 import Footer from "../Footer";
 
 function Movies({
-  value,
   isLoading,
   active,
   setActive,
   addSavedMovies,
   searchResults,
-  setValue,
   error,
   preloader,
   findMovies,
@@ -18,11 +16,8 @@ function Movies({
   savedMovies,
   deleteSavedMovie,
   checkbox,
-  clickCheckbox
-})
-
-{ 
-
+  clickCheckbox,
+}) {
   return (
     <>
       <div className="backgroundColor_grey">
@@ -38,11 +33,8 @@ function Movies({
           movies={movies}
           savedMovies={savedMovies}
           isLoading={isLoading}
-          setValue={setValue}
-          value={value}
           checkbox={checkbox}
-  clickCheckbox={clickCheckbox}
-          
+          clickCheckbox={clickCheckbox}
         />
 
         <Footer />

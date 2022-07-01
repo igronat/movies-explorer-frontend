@@ -9,8 +9,6 @@ function MoviesCardList({
   isLoading,
   findMovies,
   error,
-  value,
-  setValue,
   searchResults,
   addSavedMovies,
   savedMovies,
@@ -18,8 +16,9 @@ function MoviesCardList({
   checkbox,
   clickCheckbox,
 }) {
-
-  const [moviesCount, setMoviesCount] = useState(0);
+  const [moviesCount, setMoviesCount] = useState(
+    JSON.parse(localStorage.getItem("moviesCount")) || 0
+  );
 
   useEffect(() => {
     handleMoviesCount();
@@ -42,6 +41,7 @@ function MoviesCardList({
   }, [timeout]);
 
   const hadleResults = () => {
+    localStorage.setItem("moviesCount", JSON.stringify(moviesCount));
     if (error) {
       return (
         <p className="moviesCardList__message">
@@ -70,17 +70,21 @@ function MoviesCardList({
     .slice(0, moviesCount);
 
   const handleMoviesCount = () => {
-    if (window.innerWidth >= 320) {
-      setMoviesCount(5);
-    }
-    if (window.innerWidth >= 768) {
-      setMoviesCount(2);
-    }
-    if (window.innerWidth >= 1028) {
-      setMoviesCount(3);
-    }
-    if (window.innerWidth >= 1280) {
-      setMoviesCount(4);
+    if (moviesCount === 0) {
+      if (window.innerWidth >= 320) {
+        setMoviesCount(5);
+      }
+      if (window.innerWidth >= 768) {
+        setMoviesCount(2);
+      }
+      if (window.innerWidth >= 1028) {
+        setMoviesCount(3);
+      }
+      if (window.innerWidth >= 1280) {
+        setMoviesCount(4);
+      }
+    } else {
+      return setMoviesCount(moviesCount);
     }
   };
 
@@ -121,11 +125,7 @@ function MoviesCardList({
   return (
     <>
       {SearchForm({
-        setValue: setValue,
-        value: value,
         findMovies: findMovies,
-        clickCheckbox: clickCheckbox,
-        checkbox: checkbox,
       })}
 
       <FilterCheckbox clickCheckbox={clickCheckbox} checkbox={checkbox} />
@@ -139,6 +139,8 @@ function MoviesCardList({
         searchResults={searchResults}
         isLodingMovies={isLodingMovies}
         checkbox={checkbox}
+        shortFilms={shortFilms}
+        hadleShotFilmsResults={hadleShotFilmsResults}
       />
     </>
   );

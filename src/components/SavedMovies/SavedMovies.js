@@ -15,17 +15,11 @@ function SavedMovies({
   isLoading,
   error,
   clickCheckbox,
-  checkbox
+  checkbox,
+  search,
+  findSavedMovies,
+  searchResults
 }) {
-  const [value, setValue] = useState("");
-  // const [checkbox, setCheckbox] = useState(false);
-  const [searchResults, setSearchResults] = useState([]);
-  const [search, setSearch] = useState(false);
-
-  // const clickCheckbox = () => {
-  //   setCheckbox(!checkbox);
-  //   localStorage.setItem("checkBox", !checkbox);
-  // };
 
   const shortFilms = savedMovies
     .filter((i) => i.duration <= 40)
@@ -46,15 +40,6 @@ function SavedMovies({
         deleteSavedMovie={deleteSavedMovie}
       />
     ));
-
-  const findSavedMovies = () => {
-    setSearchResults(
-      savedMovies.filter((movie) => {
-        return movie.nameRU.toLowerCase().includes(value.toLowerCase());
-      })
-    );
-    setSearch(true);
-  };
 
   const isSearchSavedMovies = searchResults.map((movie) => (
     <MoviesCard
@@ -101,7 +86,6 @@ function SavedMovies({
 
     return shortFilms;
   };
-  console.log(savedMovies)
 
   const hadleSearchShotFilmsResults = () => {
     if (searchShortFilms.length === 0) {
@@ -116,9 +100,9 @@ function SavedMovies({
       <div className="backgroundColor_grey">
         <HeaderMovies setActive={setActive} active={active} />
         <SearchForm
-          setValue={setValue}
           findMovies={findSavedMovies}
           clickCheckbox={clickCheckbox}
+
         />
         
         <FilterCheckbox clickCheckbox={clickCheckbox} checkbox={checkbox} />
