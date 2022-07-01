@@ -22,11 +22,9 @@ function App() {
     name: "",
     email: "",
   });
-  const [isSuccess, setSuccess] = useState(false);
-  const [isFailure, setFailure] = useState(false);
-  const [isError, setIsError] = useState(false);
-  const [isErrorSaveMovie, setIsErrorSaveMovie] = useState(false);
-  const [isUpdateUser, setIsUpdateUser] = useState(false);
+  const [infoTooltip, setInfoTooltip] = useState(false);
+  const [infoTooltipIMG, setInfoTooltipIMG] = useState(false);
+  const [infoTooltipTitle, setInfoTooltipTitle] = useState("");
   const [loggedIn, setLoggedIn] = useState(false);
   const [userData, setUserData] = useState({});
   const [savedMovies, setSavedMovies] = useState([]);
@@ -52,6 +50,7 @@ function App() {
   useEffect(() => {
     setSearchResults(JSON.parse(localStorage.getItem("seach-movies")));
     setCheckbox(JSON.parse(localStorage.getItem("checkBox")));
+    setSavedMovies(JSON.parse(localStorage.getItem("saved-movies")));
   }, []);
 
   useEffect(() => {
@@ -110,8 +109,16 @@ function App() {
         if (res) {
           handleLogin(email, password);
         }
+        handleInfoTooltip({
+          img: true,
+          title: "Добро пожаловать",
+        });
       })
       .catch((err) => {
+        handleInfoTooltip({
+          img: false,
+          title: "Произошла ошибка",
+        });
         console.log(`Ошибка регистрации пользователя: ${err}`);
       });
   };
@@ -124,14 +131,23 @@ function App() {
           setLoggedIn({
             loggedIn: true,
           });
-          handleSuccess();
+          handleInfoTooltip({
+            img: true,
+            title: "Добро пожаловать",
+          });
           history.push("/movies");
         } else {
-          handleError();
+          handleInfoTooltip({
+            img: false,
+            title: "Произошла ошибка",
+          });
         }
       })
       .catch((err) => {
-        handleFailure();
+        handleInfoTooltip({
+          img: false,
+          title: "Произошла ошибка",
+        });
         console.log(`Ошибка авторизации пользователя: ${err}`);
       });
   };
@@ -157,11 +173,17 @@ function App() {
       .editProfile(user, token)
       .then((res) => {
         setCurrentUser(res);
-        handleIsUpdateUser();
+        handleInfoTooltip({
+          img: true,
+          title: "Днные успешно изменены",
+        });
       })
       .catch((err) => {
         console.log(`Ошибка обновления профиля: ${err}`);
-        handleFailure();
+        handleInfoTooltip({
+          img: false,
+          title: "Произошла ошибка",
+        });
       });
   };
 
@@ -182,9 +204,6 @@ function App() {
       name: "",
       email: "",
     });
-    setSuccess(false);
-    setFailure(false);
-    setIsError(false);
     setLoggedIn(false);
     setUserData({});
     setSavedMovies([]);
@@ -192,7 +211,7 @@ function App() {
     setMovies([]);
     setError("");
     setSearchResults([]);
-    setSearchResultsSavedMovies([])
+    setSearchResultsSavedMovies([]);
     history.push("/");
   };
 
@@ -200,31 +219,14 @@ function App() {
     setMenuActive(!menuActive);
   };
 
-  const handleSuccess = () => {
-    setSuccess(true);
-  };
-  const handleFailure = () => {
-    setFailure(true);
-  };
-
-  const handleError = () => {
-    setIsError(true);
-  };
-
-  const handleErrorSaveMovie = () => {
-    setIsErrorSaveMovie(true);
-  };
-
-  const handleIsUpdateUser = () => {
-    setIsUpdateUser(true);
-  };
+  function handleInfoTooltip({ title, img }) {
+    setInfoTooltip(true);
+    setInfoTooltipIMG(img);
+    setInfoTooltipTitle(title);
+  }
 
   const closeAllPopups = () => {
-    setSuccess(false);
-    setFailure(false);
-    setIsError(false);
-    setIsErrorSaveMovie(false);
-    setIsUpdateUser(false);
+    setInfoTooltip(false);
   };
 
   function searchMovies(movies, value) {
@@ -255,20 +257,24 @@ function App() {
           "saved-movies",
           JSON.stringify([...savedMovies, data])
         );
+        handleInfoTooltip({
+          img: true,
+          title: "Фильм успешно сохранен",
+        });
       })
       .catch((err) => {
         console.log(`Ошибка при сохранении фильма: ${err}`);
-        handleErrorSaveMovie();
+        handleInfoTooltip({
+          img: false,
+          title: "Этот фильм нельзя сохранить",
+        });
       });
   };
 
   const findSavedMovies = (value) => {
     setIsLoading(true);
-    setSearchResultsSavedMovies(
-      savedMovies.filter((movie) => {
-        return movie.nameRU.toLowerCase().includes(value.toLowerCase());
-      })
-    );
+    const newSearchMovies = searchMovies(savedMovies, value);
+    setSearchResultsSavedMovies(newSearchMovies);
     setSearch(true);
     setTimeout(() => {
       setIsLoading(false);
@@ -282,7 +288,18 @@ function App() {
       .deleteSavedMovie(deleteMovie._id, token)
       .then(() => {
         setSavedMovies(savedMovies.filter((i) => i._id !== deleteMovie._id));
+        setSearchResultsSavedMovies(
+          savedMovies.filter((i) => i._id !== deleteMovie._id)
+        );
         localStorage.setItem("saved-movies", JSON.stringify(savedMovies));
+        localStorage.setItem(
+          "saved-movies",
+          JSON.stringify(searchResultsSavedMovies)
+        );
+        handleInfoTooltip({
+          img: true,
+          title: "Фильм удален",
+        });
       })
       .catch((err) => {
         console.log(`Ошибка при удалении фильма: ${err}`);
@@ -414,42 +431,9 @@ function App() {
       </Switch>
 
       <InfoTooltip
-        name="ok"
-        img={ok}
-        title="Добро пожаловать!"
-        isOpen={isSuccess}
-        onClose={closeAllPopups}
-      />
-
-      <InfoTooltip
-        name="ok"
-        img={ok}
-        title="Данные успешно изменены"
-        isOpen={isUpdateUser}
-        onClose={closeAllPopups}
-      />
-
-      <InfoTooltip
-        name="bad"
-        img={bad}
-        title="Что-то пошло не так! Попробуйте еще раз."
-        isOpen={isFailure}
-        onClose={closeAllPopups}
-      />
-
-      <InfoTooltip
-        name="error"
-        img={bad}
-        title="Почта и/или пароль неверные"
-        isOpen={isError}
-        onClose={closeAllPopups}
-      />
-
-      <InfoTooltip
-        name="errorSaveMovie"
-        img={bad}
-        title="Этот фильм нельзя сохранить"
-        isOpen={isErrorSaveMovie}
+        img={infoTooltipIMG ? ok : bad}
+        title={infoTooltipTitle}
+        isOpen={infoTooltip}
         onClose={closeAllPopups}
       />
     </CurrentUserContext.Provider>

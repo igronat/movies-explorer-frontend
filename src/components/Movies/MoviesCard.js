@@ -45,7 +45,6 @@ function MoviesCard({ movie, addSavedMovies, savedMovies, deleteSavedMovie }) {
           )}
           {location.pathname === "/saved-movies" && (
             <DeleteButton
-              savedMovies={savedMovies}
               movie={movie}
               deleteSavedMovie={deleteSavedMovie}
             />

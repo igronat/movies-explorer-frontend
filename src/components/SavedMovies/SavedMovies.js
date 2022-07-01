@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import HeaderMovies from "../HeaderMovies";
 import SearchForm from "../Movies/SearchForm";
 import MoviesCard from "../Movies/MoviesCard";
@@ -31,6 +31,8 @@ function SavedMovies({
       />
     ));
 
+    
+
   const searchShortFilms = searchResults
     .filter((i) => i.duration <= 40)
     .map((movie) => (
@@ -41,13 +43,15 @@ function SavedMovies({
       />
     ));
 
-  const isSearchSavedMovies = searchResults.map((movie) => (
+  const isSearchSavedMovies = searchResults
+  .map((movie) => (
     <MoviesCard
-      deleteSavedMovie={deleteSavedMovie}
       movie={movie}
       key={movie._id}
+      deleteSavedMovie={deleteSavedMovie}
     />
   ));
+ 
 
   const isSavedMovies = savedMovies.map((movie) => (
     <MoviesCard

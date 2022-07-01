@@ -124,9 +124,11 @@ function MoviesCardList({
 
   return (
     <>
-      {SearchForm({
+      {/* {SearchForm({
         findMovies: findMovies,
-      })}
+      })} */}
+
+<SearchForm findMovies={findMovies} />
 
       <FilterCheckbox clickCheckbox={clickCheckbox} checkbox={checkbox} />
 
