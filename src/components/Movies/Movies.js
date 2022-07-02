@@ -1,25 +1,42 @@
 import React from "react";
 import HeaderMovies from "../HeaderMovies";
-import SearchForm from "./SearchForm";
 import MoviesCardList from "./MoviesCardList";
-import More from "./More";
 import Footer from "../Footer";
 
-
-function Movies({ active, setActive }) {
-
-
+function Movies({
+  isLoading,
+  active,
+  setActive,
+  addSavedMovies,
+  searchResults,
+  error,
+  preloader,
+  findMovies,
+  movies,
+  savedMovies,
+  deleteSavedMovie,
+  checkbox,
+  clickCheckbox,
+}) {
   return (
     <>
       <div className="backgroundColor_grey">
         <HeaderMovies setActive={setActive} active={active} />
 
-        <SearchForm />
-        <MoviesCardList 
-        isButton="likes"
-        inputButton="input"
-        spanButton="button"/>
-        <More />
+        <MoviesCardList
+          deleteSavedMovie={deleteSavedMovie}
+          addSavedMovies={addSavedMovies}
+          searchResults={searchResults}
+          error={error}
+          preloader={preloader}
+          findMovies={findMovies}
+          movies={movies}
+          savedMovies={savedMovies}
+          isLoading={isLoading}
+          checkbox={checkbox}
+          clickCheckbox={clickCheckbox}
+        />
+
         <Footer />
       </div>
     </>

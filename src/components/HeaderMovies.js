@@ -37,7 +37,7 @@ export function HeaderMovies({ active, setActive }) {
             setActive={setActive}
           />
 
-          <Account />
+          <Account setActive={setActive}/>
         </div>
       </div>
     </header>

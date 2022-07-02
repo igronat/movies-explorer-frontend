@@ -116,6 +116,18 @@
 @import url(./blocks/not-found/__title/not-found__title.css);
 @import url(./blocks/preloader/preloader.css);
 @import url(./blocks/moviesCard/__delete/moviesCard__deleye.css);
+@import url(./blocks/popup/popup.css);
+@import url(./blocks/popup/__close/popup__close.css);
+@import url(./blocks/popup/__content/popup__content.css);
+@import url(./blocks/popup/__form/_type_infoTooltip/popup__form_type_infoTooltip.css);
+@import url(./blocks/popup/__form/popup__form.css);
+@import url(./blocks/popup/__foto/_type_infoTooltip/popup__foto_type_infoTooltip.css);
+@import url(./blocks/popup/__foto/popup__foto.css);
+@import url(./blocks/popup/__overlay/popup__overlay.css);
+@import url(./blocks/popup/__text/popup__text.css);
+@import url(./blocks/popup/__title/popup__title.css);
+@import url(./blocks/popup/_opened/popup_opened.css);
+@import url(./blocks/moviesCardList/__message/moviesCardList__message.css);
 
 
 

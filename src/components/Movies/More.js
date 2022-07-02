@@ -1,9 +1,18 @@
 import React from "react";
 
-function More() {
+function More({ handleClickMore, searchResults, isLodingMovies, checkbox }) {
   return (
     <section className="more">
-      <button className="more__button">Ещё</button>
+      <button
+        className={
+          searchResults.length === isLodingMovies.length || checkbox
+            ? `more__button more__button_type_disabled`
+            : `more__button`
+        }
+        onClick={handleClickMore}
+      >
+        Ещё
+      </button>
     </section>
   );
 }

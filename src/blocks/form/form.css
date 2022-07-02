@@ -3,7 +3,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  margin: 40px 0 65px 0;
+  margin: 40px 0 16px 0;
   width: 396px;
 }
 
@@ -15,7 +15,7 @@
 @media screen and (max-width: 767px) {
   .form {
     align-items: center;
-    margin: 50px 0 65px 0;
+    margin: 50px 0 14px 0;
     width: 260px;
   }
 }
