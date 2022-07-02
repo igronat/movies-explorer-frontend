@@ -61,6 +61,7 @@ function App() {
           setCurrentUser(user);
         })
         .catch((err) => console.log(`Ошибка профиля: ${err}`));
+        
     }
   }, [loggedIn]);
 
@@ -83,15 +84,17 @@ function App() {
     }
   }, [loggedIn]);
 
+  //console.log(currentUser)
+
   useEffect(() => {
     if (loggedIn) {
       mainApi
         .getSavedMovies(token)
         .then((res) => {
+          //setCurrentUser(JSON.parse(localStorage.getItem("user")));
           const userSavedMovie = res.filter(
             (movie) => movie.owner === currentUser._id
           );
-
           setSavedMovies(userSavedMovie);
           localStorage.setItem("saved-movies", JSON.stringify(userSavedMovie));
         })
@@ -108,10 +111,14 @@ function App() {
       .then((res) => {
         if (res) {
           handleLogin(email, password);
-        }
+          handleInfoTooltip({
+            img: true,
+            title: "Добро пожаловать",
+          });
+        } else 
         handleInfoTooltip({
-          img: true,
-          title: "Добро пожаловать",
+          img: false,
+          title: "Что-то пошло не так. Повторите попытку.",
         });
       })
       .catch((err) => {
@@ -196,7 +203,6 @@ function App() {
     localStorage.removeItem("checkBox");
     localStorage.removeItem("movies");
     localStorage.removeItem("jwt");
-    localStorage.removeItem("token");
     localStorage.removeItem("moviesCount");
     setIsLoading(false);
     setMenuActive(false);
@@ -275,7 +281,7 @@ function App() {
     setIsLoading(true);
     const newSearchMovies = searchMovies(savedMovies, value);
     setSearchResultsSavedMovies(newSearchMovies);
-    setSearch(true);
+   setSearch(true)
     setTimeout(() => {
       setIsLoading(false);
     }, 1000);

@@ -31,8 +31,6 @@ function SavedMovies({
       />
     ));
 
-    
-
   const searchShortFilms = searchResults
     .filter((i) => i.duration <= 40)
     .map((movie) => (
