@@ -29,9 +29,9 @@
 
 ## Инструкции по запуску:
 * Скачать или склонировать репозиторий
-* Установить зависимости с помощью npm - 'npm i'
-* Запустить в development режиме - 'npm run dev'
-* Обновить сайт - 'npm run deploy'
+* Установить зависимости с помощью npm - `npm i`
+* Запустить в development режиме - `npm run dev`
+* Обновить сайт - `npm run deploy`
 
 ## Ссылка на github pages:
 https://github.com/igronat/movies-explorer-frontend
