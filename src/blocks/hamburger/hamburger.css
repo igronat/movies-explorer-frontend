@@ -43,7 +43,7 @@
 
 @media screen and (max-width: 1023px) {
   .hamburger__menu {
-    position: fixed;
+    position: absolute;
     justify-content: center;
     width: 520px;
     height: 100%;
