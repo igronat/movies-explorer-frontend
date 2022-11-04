@@ -1,10 +1,13 @@
 .moviesCard__button {
-  position: absolute;
+  /*position: absolute;*/
   cursor: pointer;
-  top: 0;
+  /*top: 0;
   left: 0;
   right: 0;
-  bottom: 0;
+  bottom: 0;*/
+  width: 16px;
+  height: 16px;
+  position: relative;
   background-color: white;
   -webkit-transition: 0.4s;
   transition: 0.4s;
