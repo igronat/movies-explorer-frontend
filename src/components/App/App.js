@@ -146,7 +146,7 @@ function App() {
         } else {
           handleInfoTooltip({
             img: false,
-            title: "Произошла ошибка",
+            title: `Ошибка авторизации пользователя: ${res}`,
           });
         }
       })
