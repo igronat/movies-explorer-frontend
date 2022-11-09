@@ -17,6 +17,9 @@
    /* box-shadow: 0 0 10px 3px #d7d7d7; */
    -webkit-box-shadow: 0 0 10px 3px #d7d7d7;
            box-shadow: 0 0 10px 3px #d7d7d7;
+   -webkit-appearance: none;
+   -moz-appearance: none;
+   appearance: none;
 }
 
 .moviesCard__button:before {
