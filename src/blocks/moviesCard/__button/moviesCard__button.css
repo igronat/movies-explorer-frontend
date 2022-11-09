@@ -1,21 +1,25 @@
 .moviesCard__button {
-  /*position: absolute;*/
-  cursor: pointer;
-  /*top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;*/
-  width: 16px;
-  height: 16px;
-  position: relative;
-  background-color: white;
-  -webkit-transition: 0.4s;
-  transition: 0.4s;
-  border-radius: 50%;
-  border: none;
-  /* box-shadow: 0 0 10px 3px #d7d7d7; */
-  -webkit-box-shadow: 0 0 10px 3px #d7d7d7;
-          box-shadow: 0 0 10px 3px #d7d7d7;
+   /*position: absolute;*/
+   cursor: pointer;
+   /*top: 0;
+   left: 0;
+   right: 0;
+   bottom: 0;*/
+   width: 16px;
+   height: 16px;
+   position: relative;
+   background-color: white;
+   -webkit-transition: 0.4s;
+   -o-transition: 0.4s;
+   transition: 0.4s;
+   border-radius: 50%;
+   border: none;
+   /* box-shadow: 0 0 10px 3px #d7d7d7; */
+   -webkit-box-shadow: 0 0 10px 3px #d7d7d7;
+           box-shadow: 0 0 10px 3px #d7d7d7;
+   -webkit-appearance: none;
+   -moz-appearance: none;
+   appearance: none;
 }
 
 .moviesCard__button:before {
