@@ -20,6 +20,12 @@
    -webkit-appearance: none;
    -moz-appearance: none;
    appearance: none;
+   -webkit-border-radius: 50%;
+   -moz-border-radius: 50%;
+   -webkit-backface-visibility: hidden;
+   -moz-backface-visibility: hidden;
+   -webkit-transform: translate3d(0,0,0);
+   -moz-transform: translate3d(0,0,0);
 }
 
 .moviesCard__button:before {

@@ -304,7 +304,7 @@ function App() {
         );
         handleInfoTooltip({
           img: true,
-          title: "Фильм удален",
+          title: "Фильм удален из сохраненных фильмов",
         });
       })
       .catch((err) => {
