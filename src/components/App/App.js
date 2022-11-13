@@ -146,7 +146,7 @@ function App() {
         } else {
           handleInfoTooltip({
             img: false,
-            title: `Ошибка авторизации пользователя: ${res}`,
+            title: "Произошла ошибка",
           });
         }
       })
@@ -304,7 +304,7 @@ function App() {
         );
         handleInfoTooltip({
           img: true,
-          title: "Фильм удален",
+          title: "Фильм удален из сохраненных фильмов",
         });
       })
       .catch((err) => {
